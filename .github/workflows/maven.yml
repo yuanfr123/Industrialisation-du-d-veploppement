@@ -29,17 +29,12 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-
-      
     - name: SonarCloud Scan
       run: mvn -B verify sonar:sonar
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    
     - name: Check Javadoc
       run: mvn javadoc:javadoc
     - name: Check Licences
       run: mvn apache-rat:check
-
- # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
