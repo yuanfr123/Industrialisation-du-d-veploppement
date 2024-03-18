@@ -82,7 +82,7 @@ public class Portefeuille {
      * @param j jour
      * @return valeur totale en float
      */
-    public float valeur(Jour j) throws IllegalArgumentException{
+    public float valeur(Jour j) /*throws IllegalArgumentException*/{
         float total = 0;
         for (LignePortefeuille lp : this.mapLignes.values()) {
             total = total + (lp.getQte() * lp.getAction().valeur(j));

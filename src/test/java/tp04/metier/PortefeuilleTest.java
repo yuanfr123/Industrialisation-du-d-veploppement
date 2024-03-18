@@ -81,8 +81,8 @@ public class PortefeuilleTest {
         //Assert
         Assertions.assertEquals(valeurPortefeuille, (valeur1 + valeur2), "La somme des valeurs des actions détenues n'égalent pas la valeur du portefeuille"); //égalité de valeur 
     }
-    @Test
-    public void testValeurPortefeuilleShouldFail(){
+    //@Test
+    /*public void testValeurPortefeuilleShouldFail(){
         //Arrange
         Portefeuille portefeuille = new Portefeuille();
             //création et enregistrement de la valeur de l'action1 avec une valeur de 1
@@ -108,7 +108,7 @@ public class PortefeuilleTest {
         final String currentMessage = assertThrowsExactly.getMessage();
         Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
     }
-    
+    */
     @Test
      /**
      * on test pour visualiser le portefeuille

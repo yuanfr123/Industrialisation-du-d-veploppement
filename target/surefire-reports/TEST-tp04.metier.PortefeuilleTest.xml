@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="tp04.metier.PortefeuilleTest" time="0.147" tests="1" errors="0" skipped="0" failures="1">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="tp04.metier.PortefeuilleTest" time="0.024" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,9 +15,8 @@
     <property name="user.country" value="FR"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\ravak\AppData\Local\Temp\surefire13521604232352166986\surefirebooter-20240318151516372_3.jar C:\Users\ravak\AppData\Local\Temp\surefire13521604232352166986 2024-03-18T15-15-16_202-jvmRun1 surefire-20240318151516372_1tmp surefire_0-20240318151516372_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\ravak\AppData\Local\Temp\surefire10326363292676104101\surefirebooter-20240318152639031_3.jar C:\Users\ravak\AppData\Local\Temp\surefire10326363292676104101 2024-03-18T15-26-38_846-jvmRun1 surefire-20240318152639031_1tmp surefire_0-20240318152639031_2tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="test" value="tp04.metier.PortefeuilleTest#testValeurPortefeuilleShouldFail"/>
     <property name="surefire.test.class.path" value="C:\Users\ravak\OneDrive\Bureau\M2_IPM\Indust Dev\Projet\Industrialisation-du-d-veploppement\target\test-classes;C:\Users\ravak\OneDrive\Bureau\M2_IPM\Indust Dev\Projet\Industrialisation-du-d-veploppement\target\classes;C:\Users\ravak\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\ravak\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\ravak\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\ravak\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\ravak\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\ravak\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\ravak\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\ravak"/>
@@ -31,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\ravak\AppData\Local\Temp\surefire13521604232352166986\surefirebooter-20240318151516372_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\ravak\AppData\Local\Temp\surefire10326363292676104101\surefirebooter-20240318152639031_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.2+13-LTS-58"/>
@@ -42,6 +41,7 @@
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="skipTests" value="false"/>
     <property name="maven.ext.class.path" value="C:\Program Files\NetBeans-21\netbeans\java\maven-nblib\netbeans-eventspy.jar"/>
     <property name="localRepository" value="C:\Users\ravak\.m2\repository"/>
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
@@ -60,16 +60,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testValeurPortefeuilleShouldFail" classname="tp04.metier.PortefeuilleTest" time="0.088">
-    <failure message="Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown." type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
-	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
-	at org.junit.jupiter.api.AssertThrowsExactly.assertThrowsExactly(AssertThrowsExactly.java:74)
-	at org.junit.jupiter.api.AssertThrowsExactly.assertThrowsExactly(AssertThrowsExactly.java:35)
-	at org.junit.jupiter.api.Assertions.assertThrowsExactly(Assertions.java:3060)
-	at tp04.metier.PortefeuilleTest.testValeurPortefeuilleShouldFail(PortefeuilleTest.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-]]></failure>
-  </testcase>
+  <testcase name="testValeurPortefeuilleShouldSuccess" classname="tp04.metier.PortefeuilleTest" time="0.01"/>
+  <testcase name="testVisuelToString" classname="tp04.metier.PortefeuilleTest" time="0.002"/>
+  <testcase name="testConstructorMapLignesInitialization" classname="tp04.metier.PortefeuilleTest" time="0.004"/>
 </testsuite>
