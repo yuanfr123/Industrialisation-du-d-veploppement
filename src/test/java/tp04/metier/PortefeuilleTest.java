@@ -86,19 +86,21 @@ public class PortefeuilleTest {
         Assertions.assertEquals(valeurPortefeuille, (valeur1 + valeur2), "La somme des valeurs des actions détenues n'égalent pas la valeur du portefeuille"); //égalité de valeur 
     }
     @Test
+     /**
+     * on test pour visualiser le portefeuille
+     */
     public void testToString() {
-        // 创建一些 Action 对象
+        // Action 
         Action action1 = new ActionSimple("AAPL");
         Action action2 = new ActionSimple("GOOG");
-
-        // 创建一些 LignePortefeuille 对象并放入 mapLignes 中
+        Action action3 = new ActionComposee("GHJG");
         
-        // 创建 Portefeuille 对象并设置 mapLignes
+        //Action 
         Portefeuille portefeuille = new Portefeuille();
         portefeuille.acheter(action1, 100);
         portefeuille.acheter(action2, 200);
-
-        // 调用 toString() 方法并进行断言
-        Assertions.assertEquals("{AAPL=100, GOOG=200}", portefeuille.toString());
+        portefeuille.acheter(action3, 300);
+        //Assert Attention : Order des clés alphabétique.
+        Assertions.assertEquals("{AAPL=100, GHJG=300, GOOG=200}", portefeuille.toString());
     }
 }
