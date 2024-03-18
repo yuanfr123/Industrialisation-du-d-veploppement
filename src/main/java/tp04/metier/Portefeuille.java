@@ -47,6 +47,7 @@ public class Portefeuille {
     public Portefeuille() {
         this.mapLignes = new HashMap();
     }
+    
     /**
      * R&Y
      * Méthode qui rend le hashMap des actions et qte contenu dans le portefeuille
@@ -55,7 +56,11 @@ public class Portefeuille {
     public Map<Action, LignePortefeuille> getMapLignes() {
         return mapLignes;
     }
-        public void acheter(Action a, int q) {
+
+    public void acheter(Action a, int q) throws IllegalArgumentException {
+        if (q < 1) {
+            throw new IllegalArgumentException("achter au moins une action");
+        }
         if (this.mapLignes.containsKey(a) == false) {
             this.mapLignes.put(a, new LignePortefeuille(a, q));
         } else {

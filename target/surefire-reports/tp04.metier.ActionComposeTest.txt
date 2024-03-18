@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: tp04.metier.JourTest
+Test set: tp04.metier.ActionComposeTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in tp04.metier.JourTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.094 s -- in tp04.metier.ActionComposeTest

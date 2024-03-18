@@ -41,6 +41,7 @@ public class JourTest {
         final String expectedToString = "Jour{" + "annee=" + DEFAULT_YEAR + ", noJour=" + DEFAULT_DAY + '}';
         final String currentToString = jour.toString();
 
+        
         //Assert
         Assertions.assertEquals(expectedToString, currentToString, "Basic construction");
     }

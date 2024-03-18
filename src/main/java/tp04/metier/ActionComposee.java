@@ -5,7 +5,7 @@
  */
 package tp04.metier;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -19,11 +19,38 @@ public class ActionComposee extends Action {
 
     public ActionComposee(String libelle) {
         super(libelle);
-        this.mapPanier = new HashMap();
+        this.mapPanier = new LinkedHashMap();
     }
-
-    public void enrgComposition(ActionSimple as, float pourcentage) {
+    
+    /**
+     * 
+     * @param as action simple faisant partie de l'action composee
+     * @param pourcentage de l'action simple dans l'action composee
+     * @throws IllegalArgumentException si le poucentage est negatif
+     */
+    public void enrgComposition(ActionSimple as, float pourcentage) throws IllegalArgumentException {
+        
+        if (pourcentage < 0) {
+            throw new IllegalArgumentException("Pas de valeur negative en pourcentage");
+        }
         this.mapPanier.put(as, pourcentage);
+    }
+    
+    /**
+     * voir la compostion dune action composee
+     * @return composition as string
+     */
+    public String consulterComposition()  {
+        
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("voici la composition de cette action: \n");
+                
+        for(Map.Entry<ActionSimple, Float> action: this.mapPanier.entrySet()){
+           sb.append("Action: ").append(action.getKey()).append(", Composition: ").append(action.getValue() * 100).append("\n");
+      
+        }
+        return sb.toString();
     }
 
     @Override
@@ -37,5 +64,7 @@ public class ActionComposee extends Action {
 
         return valeur;
     }
+    
+   
 
 }
