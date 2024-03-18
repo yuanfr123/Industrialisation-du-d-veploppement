@@ -20,12 +20,12 @@ import org.junit.jupiter.api.Test;
 
 /**
  *
- * @author David Navarre &lt;David.Navarre at irit.fr&gt;
+ * @author groupe 1;
  */
 public class ActionSimpleTest {
 
     private static final Jour DEFAULT_j = new Jour(1,2000);
-    private static final int DEFAULT_VALUE = 1;
+    private static final float DEFAULT_VALUE = 1.0f;
     private static final int INCORRECT_DAY = 0;
     private static final int INCORRECT_YEAR = 0;
     private static final String DEFAULT_LIB = "France 2";
@@ -34,7 +34,9 @@ public class ActionSimpleTest {
 
     public ActionSimpleTest() {
     }
-
+    /**
+     * Test vérifiant qu'une action se crée lorsque les paramètres sont bons
+     */
     @Test
     protected void testConstructorParametersAreCorrectSuccess() {
         //Arrange
@@ -48,9 +50,11 @@ public class ActionSimpleTest {
         Assertions.assertEquals(expectedToString, currentToString, "Basic construction");
     }
     
-
+    /**
+     * Test vérifiant qu'une action ne se crée pas avec un libellé invalide
+     */
     @Test
-    protected void testConstructorDayIncorrectShouldFail() {
+    protected void testConstructorLibIncorrectShouldFail() {
         //Arrange
         final String expectedMessage = "le vide n'est pas un lib valide";
         //Action and asserts
@@ -62,6 +66,9 @@ public class ActionSimpleTest {
 
     }
     
+    /**
+     * Test pour l'enregistrement d'un cours avec une valeur négative qui doit renvoyer une erreur
+     */
     @Test
     protected void testenrgCoursValueIncorrectShouldFail() {
         //Arrange
@@ -75,6 +82,9 @@ public class ActionSimpleTest {
 
     }
     
+    /**
+     * Test pour l'enregistrement d'un cours un jour ou le cours a déja été enregistré, doit renvoyer une erreur
+     */
     @Test
     protected void testenrgCoursDayIncorrectShouldFail() {
         //Arrange
@@ -84,23 +94,42 @@ public class ActionSimpleTest {
         act.enrgCours(DEFAULT_j, DEFAULT_VALUE);
         IllegalArgumentException assertThrowsExactly = Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
             act.enrgCours(DEFAULT_j, DEFAULT_VALUE);
-        }, "le vide n'est pas un lib valide");
+        });
         final String currentMessage = assertThrowsExactly.getMessage();
         Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
-
     }
     
+    /**
+     * Test du retour lorsque l'on veut accéder a la valeur d'un cours pour un jour
+     */
     @Test
     protected void testValeurParametersAreCorrectSuccess() {
         //Arrange
         final ActionSimple act = new ActionSimple(DEFAULT_LIB);
+        act.enrgCours(DEFAULT_j, DEFAULT_VALUE);
 
         //Action
-        final String expectedToString = DEFAULT_LIB;
-        final String currentToString = act.toString();
+        final float expectedToString = DEFAULT_VALUE;
+        final float currentToString = act.valeur(DEFAULT_j);
 
         //Assert
-        Assertions.assertEquals(expectedToString, currentToString, "Basic construction");
+        Assertions.assertEquals(expectedToString, currentToString, "Comparaison réussie");
+    }
+    
+    /**
+     * Test pour un jour ou la valeur du cours n'est pas définie, doir renvoyer 0
+     */
+    @Test
+    protected void testValeurDayIncorrectShouldFail() {
+        //Arrange
+        final String expectedMessage = "le cours pour "+DEFAULT_j.toString()+" n'est pas encore enregistré";
+        //Action and asserts
+        final ActionSimple act = new ActionSimple(DEFAULT_LIB);
+        IllegalArgumentException assertThrowsExactly = Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
+            act.valeur(DEFAULT_j);
+        });
+        final String currentMessage = assertThrowsExactly.getMessage();
+        Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
     }
     
     

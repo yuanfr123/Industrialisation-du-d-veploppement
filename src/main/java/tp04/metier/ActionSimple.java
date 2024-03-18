@@ -59,12 +59,17 @@ public class ActionSimple extends Action {
              
     }
 
+    /**
+     * consulter la valeur de l'action pour un jour donné
+     * @param j représente le jour pour lequel nous voulons savoir la valeur de l'action
+     * @return un float représentanrt la valeur de l'action ce jour là
+     */
     @Override
-    public float valeur(Jour j) {
+    public float valeur(Jour j) throws IllegalArgumentException{
         if (this.mapCours.containsKey(j) == true) {
             return this.mapCours.get(j).getValeur();
         } else {
-            return 0; // definition d'une constante possible
+            throw new IllegalArgumentException("le cours pour "+j.toString()+" n'est pas encore enregistré");
         }
     }
     
