@@ -30,6 +30,7 @@ public class ActionSimpleTest {
     private static final int INCORRECT_YEAR = 0;
     private static final String DEFAULT_LIB = "France 2";
     private static final String INCORRECT_LIB = "";
+    private static final int INCORRECT_VALUE = -1;
 
     public ActionSimpleTest() {
     }
@@ -62,16 +63,44 @@ public class ActionSimpleTest {
     }
     
     @Test
-    protected void testenrgCoursDayIncorrectShouldFail() {
+    protected void testenrgCoursValueIncorrectShouldFail() {
         //Arrange
-        final String expectedMessage = "le vide n'est pas un lib valide";
+        final String expectedMessage = "on ne peut pas enregistrer un cours négatif pour l'action "+ DEFAULT_LIB;
         //Action and asserts
         IllegalArgumentException assertThrowsExactly = Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
-            new ActionSimple(INCORRECT_LIB);
+            new ActionSimple(DEFAULT_LIB).enrgCours(DEFAULT_j, INCORRECT_VALUE);
         }, "le vide n'est pas un lib valide");
         final String currentMessage = assertThrowsExactly.getMessage();
         Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
 
+    }
+    
+    @Test
+    protected void testenrgCoursDayIncorrectShouldFail() {
+        //Arrange
+        final String expectedMessage = "le cours pour "+DEFAULT_LIB+" est déja enregistré a cette date";
+        //Action and asserts
+        final ActionSimple act = new ActionSimple(DEFAULT_LIB);
+        act.enrgCours(DEFAULT_j, DEFAULT_VALUE);
+        IllegalArgumentException assertThrowsExactly = Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
+            act.enrgCours(DEFAULT_j, DEFAULT_VALUE);
+        }, "le vide n'est pas un lib valide");
+        final String currentMessage = assertThrowsExactly.getMessage();
+        Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
+
+    }
+    
+    @Test
+    protected void testValeurParametersAreCorrectSuccess() {
+        //Arrange
+        final ActionSimple act = new ActionSimple(DEFAULT_LIB);
+
+        //Action
+        final String expectedToString = DEFAULT_LIB;
+        final String currentToString = act.toString();
+
+        //Assert
+        Assertions.assertEquals(expectedToString, currentToString, "Basic construction");
     }
     
     

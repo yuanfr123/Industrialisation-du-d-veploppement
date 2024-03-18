@@ -54,7 +54,7 @@ public class ActionSimple extends Action {
             }
         }
         else {
-            throw new IllegalArgumentException("le cours est pour "+this.getLibelle()+" est déja enregistré a cette date");
+            throw new IllegalArgumentException("le cours pour "+this.getLibelle()+" est déja enregistré a cette date");
         }
              
     }
