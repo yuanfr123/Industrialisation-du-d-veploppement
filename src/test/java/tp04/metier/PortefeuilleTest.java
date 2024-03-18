@@ -22,8 +22,10 @@ package tp04.metier;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PortefeuilleTest {
@@ -81,8 +83,8 @@ public class PortefeuilleTest {
         //Assert
         Assertions.assertEquals(valeurPortefeuille, (valeur1 + valeur2), "La somme des valeurs des actions détenues n'égalent pas la valeur du portefeuille"); //égalité de valeur 
     }
-    //@Test
-    /*public void testValeurPortefeuilleShouldFail(){
+    @Test
+    public void testValeurPortefeuilleShouldFail(){
         //Arrange
         Portefeuille portefeuille = new Portefeuille();
             //création et enregistrement de la valeur de l'action1 avec une valeur de 1
@@ -108,7 +110,71 @@ public class PortefeuilleTest {
         final String currentMessage = assertThrowsExactly.getMessage();
         Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
     }
+    
+    @Test
+    /**
+    Testez la vente légale des actions.
     */
+    public void testVendreSuccess(){
+        // Arrange 
+        Action action1 = new ActionSimple("AAPL");
+        Action action2 = new ActionComposee("GOOG");
+        
+        //Action 
+        Portefeuille portefeuille = new Portefeuille();
+        portefeuille.acheter(action1, 100);
+        portefeuille.acheter(action2, 200);
+        
+        portefeuille.vendre(action1, 50);
+        portefeuille.vendre(action2, 50);
+        
+        //Assert Attention : Order des clés alphabétique.
+        Assertions.assertEquals("{AAPL=50, GOOG=150}", portefeuille.toString()); 
+    }
+    
+    @Test
+    /**
+    Testez la vente de tous les actions.
+    */
+    public void testVendreSuccessTous(){
+        // Arrange 
+        Action action1 = new ActionSimple("AAPL");
+        Action action2 = new ActionComposee("GOOG");
+        
+        //Action 
+        Portefeuille portefeuille = new Portefeuille();
+        portefeuille.acheter(action1, 100);
+        portefeuille.acheter(action2, 200);
+        
+        portefeuille.vendre(action1, 100);
+        portefeuille.vendre(action2, 200);
+        
+        //Assert Attention : Order des clés alphabétique.
+        Assertions.assertEquals("{}", portefeuille.toString()); 
+    }
+    
+    @Test
+    /**
+    Testez la vente de tous les actions.
+    */
+    public void testVendreFailSuperieur(){
+        // Arrange 
+        Action action1 = new ActionSimple("AAPL");
+        Action action2 = new ActionComposee("GOOG");
+        
+        //Action 
+        Portefeuille portefeuille = new Portefeuille();
+        portefeuille.acheter(action1, 10);
+        portefeuille.acheter(action2, 20);
+        
+        //Assert
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,()->{
+        portefeuille.vendre(action1, 100);
+        portefeuille.vendre(action2, 200);});
+        
+        assertEquals("Vous n'avez pas autant d'actions.",exception.getMessage());
+    }
+    
     @Test
      /**
      * on test pour visualiser le portefeuille

@@ -68,13 +68,18 @@ public class Portefeuille {
         }
     }
 
-    public void vendre(Action a, int q) {
+    public void vendre(Action a, int q) throws IllegalArgumentException{
         if (this.mapLignes.containsKey(a) == true) {
             if (this.mapLignes.get(a).getQte() > q) {
                 this.mapLignes.get(a).setQte(this.mapLignes.get(a).getQte() - q);
             } else if (this.mapLignes.get(a).getQte() == q) {
                 this.mapLignes.remove(a);
-            }
+            }else{
+            throw new IllegalArgumentException("Vous n'avez pas autant d'actions.");
+        }
+        }
+        else{
+            throw new IllegalArgumentException("Ne peut pas vendre les actions qu'on n'a pas.");
         }
     }
 
@@ -87,7 +92,7 @@ public class Portefeuille {
      * @param j jour
      * @return valeur totale en float
      */
-    public float valeur(Jour j) /*throws IllegalArgumentException*/{
+    public float valeur(Jour j) throws IllegalArgumentException{
         float total = 0;
         for (LignePortefeuille lp : this.mapLignes.values()) {
             total = total + (lp.getQte() * lp.getAction().valeur(j));
