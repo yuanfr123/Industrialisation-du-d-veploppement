@@ -22,7 +22,11 @@ public class ActionComposee extends Action {
         this.mapPanier = new LinkedHashMap();
     }
 
-    public void enrgComposition(ActionSimple as, float pourcentage) {
+    public void enrgComposition(ActionSimple as, float pourcentage) throws IllegalArgumentException {
+        
+        if (pourcentage < 0) {
+            throw new IllegalArgumentException("Pas de valeur negative en pourcentage");
+        }
         this.mapPanier.put(as, pourcentage);
     }
     

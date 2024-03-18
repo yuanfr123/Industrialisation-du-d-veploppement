@@ -29,21 +29,34 @@ public class ActionComposeTest {
     
    private Portefeuille portefeuille;
    
+   private ActionSimple france2;
+   
+   private ActionSimple france4;
+   
+   private ActionComposee  franceTV;
+   
    @BeforeEach
     public void setUp() {
         portefeuille = new Portefeuille();
-    }
-    
-    @Test
-    public void testConsulterCompositionActionComposee() {
-        // Ajouter des actions simples au panier
-        ActionSimple france2 = new ActionSimple("france 2");
-        ActionSimple france4 = new ActionSimple("france 4");
+        france2 = new ActionSimple("france 2");
+        france4 = new ActionSimple("france 4");
         
         france2.enrgCours(new Jour(2024, 20), 30.2f);
         france4.enrgCours(new Jour(2024, 20), 32.3f);
+        franceTV = new ActionComposee("FranceTV");
+    }
+    
+    /**
+     * afficher la composition d'une action composee
+     * 1) creation 2 action simple.
+     * 2) creation  d'une action composee.
+     * 3) definition la compostion action composee
+     * 4) test la methode
+     */
+    @Test
+    public void testConsulterCompositionActionComposee() {
+        
         // Créer une action composée
-       ActionComposee franceTV = new ActionComposee("FranceTV");
        franceTV.enrgComposition(france4, 0.50f);
        franceTV.enrgComposition(france2, 0.50f);
        
@@ -56,20 +69,22 @@ public class ActionComposeTest {
         Assertions.assertEquals(compositionAttendue, franceTV.consulterComposition());
     }
     
+    /**
+     * test achat action composee
+     * 1) creation 2 action simple.
+     * 2) creation  d'une action composee.
+     * 3) definition la compostion action composee
+     * 4) achat d'une action composee et d'une action simple.
+     * 5) test la methode portefeuille.
+     */
     @Test
     public void testAcheterActionComposee() {
         
-        
-        // Ajouter des actions simples au panier
-        ActionSimple france2 = new ActionSimple("france 2");
-        ActionSimple france4 = new ActionSimple("france 4");
-        
-        france2.enrgCours(new Jour(2024, 20), 30.2f);
-        france4.enrgCours(new Jour(2024, 20), 32.3f);
-        // Créer une action composée
-       ActionComposee franceTV = new ActionComposee("FranceTV");
+  
        franceTV.enrgComposition(france4, 0.50f);
        franceTV.enrgComposition(france2, 0.50f);
+       
+       
        
        portefeuille.acheter(franceTV, 3);
        
@@ -81,4 +96,59 @@ public class ActionComposeTest {
                                  
         Assertions.assertEquals(compositionAttendue, portefeuille.toString());
     }
+    
+     @Test
+    public void testDefinitionAchatActionShouldFail(){
+        
+        final String expectedMessage = "achter au moins une action";
+        //Action and asserts
+        IllegalArgumentException assertThrowsExactly = Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
+            portefeuille.acheter(franceTV, 0);
+        }, "achter au moins une action");
+        final String currentMessage = assertThrowsExactly.getMessage();
+        Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
+    }
+    
+    @Test
+    protected void testAchatActionParametersAreCorrectSuccess() {
+       
+        portefeuille.acheter(franceTV, 3);
+        
+        String expectedMsg = "{FranceTV=3}";
+        //Action
+        final String currentPortefeuille = portefeuille.toString();
+
+        
+        //Assert
+        Assertions.assertEquals(expectedMsg, currentPortefeuille);
+    }
+    
+    
+    @Test
+    public void testDefinitionMauvaisParamettreShouldFail(){
+        
+        final String expectedMessage = "Pas de valeur negative en pourcentage";
+        //Action and asserts
+        IllegalArgumentException assertThrowsExactly = Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
+            franceTV.enrgComposition(france2, -0.50f);
+        }, "Pas de valeur negative en pourcentage");
+        final String currentMessage = assertThrowsExactly.getMessage();
+        Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
+    }
+    
+    @Test
+    protected void testConstructorParametersAreCorrectSuccess() {
+       
+        franceTV.enrgComposition(france2, 0.50f);
+        
+        String expectedMsg = "voici la composition de cette action: \n" +
+                                      "Action: france 2, Composition: 50.0\n";
+        //Action
+        final String currentComposition = franceTV.consulterComposition();
+
+        
+        //Assert
+        Assertions.assertEquals(expectedMsg, currentComposition);
+    }
+
 }

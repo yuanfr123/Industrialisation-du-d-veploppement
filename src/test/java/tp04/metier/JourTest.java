@@ -41,11 +41,12 @@ public class JourTest {
         final String expectedToString = "Jour{" + "annee=" + DEFAULT_YEAR + ", noJour=" + DEFAULT_DAY + '}';
         final String currentToString = jour.toString();
 
+        
         //Assert
         Assertions.assertEquals(expectedToString, currentToString, "Basic construction");
     }
 
-//    @Test
+    //@Test
     protected void testConstructorDayIncorrectShouldFail() {
         //Arrange
         final String expectedMessage = "0 must not be used as a valid Day";
