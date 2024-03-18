@@ -19,6 +19,7 @@ package tp04.metier;
  *
  * @author Ravaka & Yujie
  */
+import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -29,7 +30,7 @@ public class PortefeuilleTest {
     
     Jour DEFAULT_DAY = new Jour(1,1);
     Jour INCORRECT_DAY = new Jour(2,1);
-    private Portefeuille portefeuille = new Portefeuille();
+    
     
     public PortefeuilleTest(){
     }
@@ -42,6 +43,8 @@ public class PortefeuilleTest {
      * HashMap est vide au commencement.
      */
     protected void testConstructorMapLignesInitialization() {
+        //Arrange
+        Portefeuille portefeuille = new Portefeuille();
         // Action
         Map<?, ?> mapLignes = portefeuille.getMapLignes();
 
@@ -63,6 +66,7 @@ public class PortefeuilleTest {
      */
     protected void testValeurPortefeuilleShouldSuccess(){
         //Arrange
+        Portefeuille portefeuille = new Portefeuille();
             //création et enregistrement de la valeur de l'action1 avec une valeur de 1
             ActionSimple action1 = new ActionSimple("Action1");
             action1.enrgCours(DEFAULT_DAY, 1);
@@ -80,5 +84,21 @@ public class PortefeuilleTest {
         
         //Assert
         Assertions.assertEquals(valeurPortefeuille, (valeur1 + valeur2), "La somme des valeurs des actions détenues n'égalent pas la valeur du portefeuille"); //égalité de valeur 
+    }
+    @Test
+    public void testToString() {
+        // 创建一些 Action 对象
+        Action action1 = new ActionSimple("AAPL");
+        Action action2 = new ActionSimple("GOOG");
+
+        // 创建一些 LignePortefeuille 对象并放入 mapLignes 中
+        
+        // 创建 Portefeuille 对象并设置 mapLignes
+        Portefeuille portefeuille = new Portefeuille();
+        portefeuille.acheter(action1, 100);
+        portefeuille.acheter(action2, 200);
+
+        // 调用 toString() 方法并进行断言
+        Assertions.assertEquals("{AAPL=100, GOOG=200}", portefeuille.toString());
     }
 }
