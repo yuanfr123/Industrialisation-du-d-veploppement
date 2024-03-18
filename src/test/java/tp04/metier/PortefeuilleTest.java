@@ -31,6 +31,8 @@ public class PortefeuilleTest {
     Jour DEFAULT_DAY = new Jour(1,1);
     Jour INCORRECT_DAY = new Jour(2,1);
     
+    Jour jourActuelle = new Jour(2024, 18);
+    
     
     public PortefeuilleTest(){
     }
@@ -81,8 +83,8 @@ public class PortefeuilleTest {
         //Assert
         Assertions.assertEquals(valeurPortefeuille, (valeur1 + valeur2), "La somme des valeurs des actions détenues n'égalent pas la valeur du portefeuille"); //égalité de valeur 
     }
-    //@Test
-    /*public void testValeurPortefeuilleShouldFail(){
+    @Test
+    public void testValeurPortefeuilleShouldFail(){
         //Arrange
         Portefeuille portefeuille = new Portefeuille();
             //création et enregistrement de la valeur de l'action1 avec une valeur de 1
@@ -98,7 +100,6 @@ public class PortefeuilleTest {
             //création du portefeuille et consulation de sa valeur 
             portefeuille.acheter(action1, 1);
             portefeuille.acheter(action2, 1);
-            float valeurPortefeuille = portefeuille.valeur(INCORRECT_DAY);
             final String expectedMessage = "le cours pour "+INCORRECT_DAY.toString()+" n'est pas encore enregistré";
             IllegalArgumentException assertThrowsExactly = Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
                 portefeuille.valeur(INCORRECT_DAY);
@@ -108,7 +109,7 @@ public class PortefeuilleTest {
         final String currentMessage = assertThrowsExactly.getMessage();
         Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
     }
-    */
+    
     @Test
      /**
      * on test pour visualiser le portefeuille
@@ -127,5 +128,29 @@ public class PortefeuilleTest {
         
         //Assert Attention : Order des clés alphabétique.
         Assertions.assertEquals("{AAPL=100, GHJG=300, GOOG=200}", portefeuille.toString());
+    }
+    
+    @Test
+    public void testEvaluationPortefeuilleVeille() {
+        Portefeuille portefeuille = new Portefeuille();
+            //création et enregistrement de la valeur de l'action1 avec une valeur de 1
+            ActionSimple action1 = new ActionSimple("Action1");
+            action1.enrgCours(jourActuelle, 4);
+            action1.enrgCours(new Jour(2024,17), 1);
+            //création et enregistrement de la valeur de l'action2 avec une valeur de 2
+            ActionSimple action2 = new ActionSimple("Action2");
+            action2.enrgCours(jourActuelle, 2);
+            action2.enrgCours(new Jour(2024,17), 1);
+            
+            portefeuille.acheter(action1, 1);
+            portefeuille.acheter(action2, 1);
+            
+            String expectedMsg = "Evolution de la valeur du portefeuille: \n" + 
+                    "valeur au Jour{annee=2024, noJour=17}: 2.0\n" +
+                    "valeur au Jour{annee=2024, noJour=18}: 6.0\n"+
+                    "Evolution : 200.0% ↑";
+            
+            Assertions.assertEquals(expectedMsg, portefeuille.afficherEvolutionVeille(jourActuelle));
+
     }
 }

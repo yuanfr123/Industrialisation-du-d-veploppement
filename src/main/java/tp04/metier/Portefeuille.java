@@ -87,12 +87,58 @@ public class Portefeuille {
      * @param j jour
      * @return valeur totale en float
      */
-    public float valeur(Jour j) /*throws IllegalArgumentException*/{
+    public float valeur(Jour j) throws IllegalArgumentException{
         float total = 0;
         for (LignePortefeuille lp : this.mapLignes.values()) {
             total = total + (lp.getQte() * lp.getAction().valeur(j));
             //illegalArguments Message : le cours pour le jour j n'est pas encore enregistré
         }
         return total;
+    }
+    
+    /**
+     * 
+     * @param j jour actuelle
+     * @return l'evolution de la valeur par rapport a la veille;
+     */
+    public String afficherEvolutionVeille(Jour j) {
+        Jour veille = j.jourPrecedent();
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("Evolution de la valeur du portefeuille: \n");
+        
+        sb.append("valeur au ").append(veille.toString()).append(": ").append(this.valeur(veille)).append("\n");
+        
+        sb.append("valeur au ").append(j.toString()).append(": ").append(this.valeur(j)).append("\n");
+        
+        if (this.valeur(j) > this.valeur(veille)) {
+            sb.append("Evolution : ").append((((this.valeur(j) - this.valeur(veille)) / this.valeur(veille))) * 100).append("% ↑");
+            return sb.toString();
+        }
+        sb.append("Evolution : ").append((((this.valeur(j) - this.valeur(veille)) / this.valeur(veille))) * 100).append("% ↓");
+
+        
+        return sb.toString();
+        
+    }
+    
+    public String afficherEvolutionSemaine(Jour j) {
+        Jour semainePrecedente = j.semainePrecedente();
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("Evolution de la valeur du portefeuille: \n");
+        
+        sb.append("valeur au ").append(semainePrecedente.toString()).append(": ").append(this.valeur(semainePrecedente)).append("\n");
+        
+        sb.append("valeur au ").append(j.toString()).append(": ").append(this.valeur(j)).append("\n");
+        
+        if (this.valeur(j) > this.valeur(semainePrecedente)) {
+            sb.append("Evolution : ").append((this.valeur(j) - this.valeur(semainePrecedente)) / 100).append("↑");
+            return sb.toString();
+        }
+       
+        sb.append("Evolution : ").append((this.valeur(j) - this.valeur(semainePrecedente)) / 100).append("↓");
+        return sb.toString();
+        
     }
 }
