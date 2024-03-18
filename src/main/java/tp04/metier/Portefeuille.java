@@ -16,6 +16,10 @@ public class Portefeuille {
 
     Map<Action, LignePortefeuille> mapLignes;
 
+    Map<Action, LignePortefeuille> getMapLignes() {
+        return mapLignes;
+    }
+
     private class LignePortefeuille {
 
         private Action action;
