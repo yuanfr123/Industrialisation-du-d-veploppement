@@ -21,7 +21,13 @@ public class ActionComposee extends Action {
         super(libelle);
         this.mapPanier = new LinkedHashMap();
     }
-
+    
+    /**
+     * 
+     * @param as action simple faisant partie de l'action composee
+     * @param pourcentage de l'action simple dans l'action composee
+     * @throws IllegalArgumentException si le poucentage est negatif
+     */
     public void enrgComposition(ActionSimple as, float pourcentage) throws IllegalArgumentException {
         
         if (pourcentage < 0) {

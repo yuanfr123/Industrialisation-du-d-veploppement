@@ -96,6 +96,11 @@ public class ActionComposeTest {
         Assertions.assertEquals(compositionAttendue, portefeuille.toString());
     }
     
+    /**
+     * test definition achat d'actions avec une qte non autorisee
+     * 
+     */
+    
      @Test
     public void testDefinitionAchatActionShouldFail(){
         
@@ -108,6 +113,10 @@ public class ActionComposeTest {
         Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
     }
     
+    
+    /**
+     * test achat d'actions avec une qte autorisee
+     */
     @Test
     protected void testAchatActionParametersAreCorrectSuccess() {
        
@@ -123,6 +132,9 @@ public class ActionComposeTest {
     }
     
     
+    /**
+     * test definition composition avec un pourcentage negatif
+     */
     @Test
     public void testDefinitionMauvaisParamettreShouldFail(){
         
@@ -135,6 +147,9 @@ public class ActionComposeTest {
         Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
     }
     
+    /**
+     * test definition composition avec un pourcentage positif
+     */
     @Test
     protected void testConstructorParametersAreCorrectSuccess() {
        
