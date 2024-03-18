@@ -5,6 +5,7 @@
  */
 package tp04.metier;
 
+import java.sql.DriverManager;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,26 +19,58 @@ public class ActionSimple extends Action {
     private Map<Jour, Cours> mapCours;
 
     // constructeur
-    public ActionSimple(String libelle) {
+    /**
+     * constructeur permettant de créer une action simple
+     * @param libelle correspond au nom de l'action
+     */
+    public ActionSimple(String libelle) throws IllegalArgumentException {
         // Action simple initialisée comme 1 action
         super(libelle);
-        // init spécifique
-        this.mapCours = new HashMap();
+        if (!libelle.isEmpty()) {
+            // init spécifique
+            this.mapCours = new HashMap();
+            System.out.println("action crée");
+        }
+        else {
+            String erreur = "le vide n'est pas un lib valide";
+            throw new IllegalArgumentException(erreur);
+        }
     }
 
     // enrg possible si pas de cours pour ce jour
-    public void enrgCours(Jour j, float v) {
+
+    /**
+     * méthode permettant l'enregistrement du cours d'une action a un jour donné
+     * @param j correspond au jours sur lequel on enregistre le cour
+     * @param v correspond a la valeur a définir pour ce jour et action
+     */
+    public void enrgCours(Jour j, float v) throws IllegalArgumentException {
         if (this.mapCours.containsKey(j) == false) {
-            this.mapCours.put(j, new Cours(j, v));
+            if (v>0) {
+                this.mapCours.put(j, new Cours(j, v));
+            }
+            else {
+                throw new IllegalArgumentException("on ne peut pas enregistrer un cours négatif pour l'action "+ this.getLibelle());
+            }
         }
+        else {
+            throw new IllegalArgumentException("le cours pour "+this.getLibelle()+" est déja enregistré a cette date");
+        }
+             
     }
 
+    /**
+     * consulter la valeur de l'action pour un jour donné
+     * @param j représente le jour pour lequel nous voulons savoir la valeur de l'action
+     * @return un float représentanrt la valeur de l'action ce jour là
+     */
     @Override
-    public float valeur(Jour j) {
+    public float valeur(Jour j) throws IllegalArgumentException{
         if (this.mapCours.containsKey(j) == true) {
             return this.mapCours.get(j).getValeur();
         } else {
-            return 0; // definition d'une constante possible
+            throw new IllegalArgumentException("le cours pour "+j.toString()+" n'est pas encore enregistré");
         }
     }
+    
 }
