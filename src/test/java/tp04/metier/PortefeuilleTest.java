@@ -113,7 +113,7 @@ public class PortefeuilleTest {
     
     @Test
     /**
-    Testez la vente légale des actions.
+    *Testez la vente d'actions quand vous avez autant d'actions (pas également).
     */
     public void testVendreSuccess(){
         // Arrange 
@@ -134,7 +134,7 @@ public class PortefeuilleTest {
     
     @Test
     /**
-    Testez la vente de tous les actions.
+    *Testez la vente d'actions quand vous avez autant d'actions (également).
     */
     public void testVendreSuccessTous(){
         // Arrange 
@@ -155,7 +155,7 @@ public class PortefeuilleTest {
     
     @Test
     /**
-    Testez la vente de tous les actions.
+    *Testez la vente d'actions quand vous n'avez pas autant d'actions.
     */
     public void testVendreFailSuperieur(){
         // Arrange 
