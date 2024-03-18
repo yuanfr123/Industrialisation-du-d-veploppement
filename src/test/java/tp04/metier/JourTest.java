@@ -45,7 +45,7 @@ public class JourTest {
         Assertions.assertEquals(expectedToString, currentToString, "Basic construction");
     }
 
-    //@Test
+//    @Test
     protected void testConstructorDayIncorrectShouldFail() {
         //Arrange
         final String expectedMessage = "0 must not be used as a valid Day";
