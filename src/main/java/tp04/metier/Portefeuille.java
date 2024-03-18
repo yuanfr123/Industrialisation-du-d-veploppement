@@ -47,8 +47,15 @@ public class Portefeuille {
     public Portefeuille() {
         this.mapLignes = new HashMap();
     }
-
-    public void acheter(Action a, int q) {
+    /**
+     * R&Y
+     * Méthode qui rend le hashMap des actions et qte contenu dans le portefeuille
+     * @return hashMap
+     */
+    public Map<Action, LignePortefeuille> getMapLignes() {
+        return mapLignes;
+    }
+        public void acheter(Action a, int q) {
         if (this.mapLignes.containsKey(a) == false) {
             this.mapLignes.put(a, new LignePortefeuille(a, q));
         } else {
@@ -69,11 +76,17 @@ public class Portefeuille {
     public String toString() {
         return this.mapLignes.toString();
     }
-
-    public float valeur(Jour j) {
+    /**
+     * R&Y
+     * Méthode qui rend la valeur globale contenu dans le portefeuille
+     * @param j jour
+     * @return valeur totale en float
+     */
+    public float valeur(Jour j) /*throws IllegalArgumentException*/{
         float total = 0;
         for (LignePortefeuille lp : this.mapLignes.values()) {
             total = total + (lp.getQte() * lp.getAction().valeur(j));
+            //illegalArguments Message : le cours pour le jour j n'est pas encore enregistré
         }
         return total;
     }
