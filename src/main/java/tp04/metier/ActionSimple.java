@@ -23,11 +23,18 @@ public class ActionSimple extends Action {
      * constructeur permettant de créer une action simple
      * @param libelle correspond au nom de l'action
      */
-    public ActionSimple(String libelle) {
+    public ActionSimple(String libelle) throws IllegalArgumentException {
         // Action simple initialisée comme 1 action
         super(libelle);
-        // init spécifique
-        this.mapCours = new HashMap();
+        if (!libelle.isEmpty()) {
+            // init spécifique
+            this.mapCours = new HashMap();
+            System.out.println("action crée");
+        }
+        else {
+            String erreur = "le vide n'est pas un lib valide";
+            throw new IllegalArgumentException(erreur);
+        }
     }
 
     // enrg possible si pas de cours pour ce jour
