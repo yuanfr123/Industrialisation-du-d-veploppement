@@ -59,10 +59,6 @@ public class PortefeuilleTest {
      * on test pour un jour donnée la valeur du portefeuille
      * les actions et le portfeuille sont paramétrés pour le même jour 
      * 
-     * tester ur des dates différentes 
-     * portefeuille sur date +1 
-     * enrgeistrement action date -1
-     * 
      */
     protected void testValeurPortefeuilleShouldSuccess(){
         //Arrange
@@ -85,6 +81,34 @@ public class PortefeuilleTest {
         //Assert
         Assertions.assertEquals(valeurPortefeuille, (valeur1 + valeur2), "La somme des valeurs des actions détenues n'égalent pas la valeur du portefeuille"); //égalité de valeur 
     }
+    @Test
+    public void testValeurPortefeuilleShouldFail(){
+        //Arrange
+        Portefeuille portefeuille = new Portefeuille();
+            //création et enregistrement de la valeur de l'action1 avec une valeur de 1
+            ActionSimple action1 = new ActionSimple("Action1");
+            action1.enrgCours(DEFAULT_DAY, 1);
+            float valeur1 = action1.valeur(DEFAULT_DAY);
+            //création et enregistrement de la valeur de l'action2 avec une valeur de 2
+            ActionSimple action2 = new ActionSimple("Action2");
+            action2.enrgCours(DEFAULT_DAY, 2);
+            float valeur2 = action2.valeur(DEFAULT_DAY);
+        
+        //Action 
+            //création du portefeuille et consulation de sa valeur 
+            portefeuille.acheter(action1, 1);
+            portefeuille.acheter(action2, 1);
+            float valeurPortefeuille = portefeuille.valeur(INCORRECT_DAY);
+            final String expectedMessage = "le cours pour "+INCORRECT_DAY.toString()+" n'est pas encore enregistré";
+            IllegalArgumentException assertThrowsExactly = Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
+                portefeuille.valeur(INCORRECT_DAY);
+            });
+        
+        //Assert
+        final String currentMessage = assertThrowsExactly.getMessage();
+        Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
+    }
+    
     @Test
      /**
      * on test pour visualiser le portefeuille
