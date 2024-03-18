@@ -89,8 +89,8 @@ public class PortefeuilleTest {
      /**
      * on test pour visualiser le portefeuille
      */
-    public void testToString() {
-        // Action 
+    public void testVisuelToString() {
+        // Arrange 
         Action action1 = new ActionSimple("AAPL");
         Action action2 = new ActionSimple("GOOG");
         Action action3 = new ActionComposee("GHJG");
@@ -100,6 +100,7 @@ public class PortefeuilleTest {
         portefeuille.acheter(action1, 100);
         portefeuille.acheter(action2, 200);
         portefeuille.acheter(action3, 300);
+        
         //Assert Attention : Order des clés alphabétique.
         Assertions.assertEquals("{AAPL=100, GHJG=300, GOOG=200}", portefeuille.toString());
     }
