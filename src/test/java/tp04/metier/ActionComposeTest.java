@@ -27,23 +27,19 @@ import org.junit.jupiter.api.BeforeEach;
 
 public class ActionComposeTest {
     
-   private Portefeuille portefeuille;
+   private Portefeuille portefeuille = new Portefeuille();
    
-   private ActionSimple france2;
+   private ActionSimple france2 = new ActionSimple("france 2");
    
-   private ActionSimple france4;
-   
-   private ActionComposee  franceTV;
+   private ActionSimple france4 = new ActionSimple("france 4");
+    
+   private ActionComposee  franceTV = new ActionComposee("FranceTV");
    
    @BeforeEach
     public void setUp() {
-        portefeuille = new Portefeuille();
-        france2 = new ActionSimple("france 2");
-        france4 = new ActionSimple("france 4");
-        
+     
         france2.enrgCours(new Jour(2024, 20), 30.2f);
         france4.enrgCours(new Jour(2024, 20), 32.3f);
-        franceTV = new ActionComposee("FranceTV");
     }
     
     /**
