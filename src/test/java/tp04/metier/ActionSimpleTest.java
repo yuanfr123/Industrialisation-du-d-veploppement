@@ -60,5 +60,20 @@ public class ActionSimpleTest {
         Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
 
     }
+    
+    @Test
+    protected void testenrgCoursDayIncorrectShouldFail() {
+        //Arrange
+        final String expectedMessage = "le vide n'est pas un lib valide";
+        //Action and asserts
+        IllegalArgumentException assertThrowsExactly = Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
+            new ActionSimple(INCORRECT_LIB);
+        }, "le vide n'est pas un lib valide");
+        final String currentMessage = assertThrowsExactly.getMessage();
+        Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
+
+    }
+    
+    
 }
 

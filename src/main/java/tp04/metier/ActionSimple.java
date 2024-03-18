@@ -44,17 +44,17 @@ public class ActionSimple extends Action {
      * @param j correspond au jours sur lequel on enregistre le cour
      * @param v correspond a la valeur a définir pour ce jour et action
      */
-    public void enrgCours(Jour j, float v) {
+    public void enrgCours(Jour j, float v) throws IllegalArgumentException {
         if (this.mapCours.containsKey(j) == false) {
             if (v>0) {
                 this.mapCours.put(j, new Cours(j, v));
             }
             else {
-                System.out.println("on ne peut pas enregistrer un cours négatif pour l'action "+ this.getLibelle());
+                throw new IllegalArgumentException("on ne peut pas enregistrer un cours négatif pour l'action "+ this.getLibelle());
             }
         }
         else {
-            System.out.println("le cours est pour "+this.getLibelle()+" est déja enregistré a cette date");
+            throw new IllegalArgumentException("le cours est pour "+this.getLibelle()+" est déja enregistré a cette date");
         }
              
     }
