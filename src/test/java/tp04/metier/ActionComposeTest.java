@@ -86,9 +86,12 @@ public class ActionComposeTest {
        
        portefeuille.acheter(france2, 5);
        
+       //test pour verifier la modifi de qte d'une qction deja presente
+       
+       portefeuille.acheter(franceTV, 3);
 
         // Vérifier que la composition de l'action composée est correcte
-        String compositionAttendue = "{FranceTV=3, france 2=5}";
+        String compositionAttendue = "{FranceTV=6, france 2=5}";
                                  
         Assertions.assertEquals(compositionAttendue, portefeuille.toString());
     }
