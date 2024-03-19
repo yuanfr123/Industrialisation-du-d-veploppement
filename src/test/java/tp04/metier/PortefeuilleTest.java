@@ -56,33 +56,6 @@ public class PortefeuilleTest {
         assertTrue(mapLignes.isEmpty(), "mapLignes should be empty initially");//Vide 
     }
     
-    @Test 
-    /**
-     *on test pour un jour donnée la valeur du portefeuille.
-     *les actions et le portfeuille sont paramétrés pour le même jour.
-     */
-    protected void testValeurPortefeuilleShouldSuccess(){
-        //Arrange
-        Portefeuille portefeuille = new Portefeuille();
-            //création et enregistrement de la valeur de l'action1 avec une valeur de 1
-            ActionSimple action1 = new ActionSimple("Action1");
-            action1.enrgCours(DEFAULT_DAY, 1);
-            float valeur1 = action1.valeur(DEFAULT_DAY);
-            //création et enregistrement de la valeur de l'action2 avec une valeur de 2
-            ActionSimple action2 = new ActionSimple("Action2");
-            action2.enrgCours(DEFAULT_DAY, 2);
-            float valeur2 = action2.valeur(DEFAULT_DAY);
-        
-        //Action 
-            //création du portefeuille et consulation de sa valeur 
-            portefeuille.acheter(action1, 1);
-            portefeuille.acheter(action2, 1);
-            float valeurPortefeuille = portefeuille.valeur(DEFAULT_DAY);
-        
-        //Assert
-        Assertions.assertEquals(valeurPortefeuille, (valeur1 + valeur2), "La somme des valeurs des actions détenues n'égalent pas la valeur du portefeuille"); //égalité de valeur 
-    }
-    
     @Test
     /**
     *Testez la vente d'actions quand vous avez autant d'actions (pas également).
@@ -186,6 +159,33 @@ public class PortefeuilleTest {
         Assertions.assertEquals("{AAPL=100, GHJG=300, GOOG=200}", portefeuille.toString());
     }
     
+    @Test 
+    /**
+     *on test pour un jour donnée la valeur du portefeuille.
+     *les actions et le portfeuille sont paramétrés pour le même jour.
+     */
+    protected void testValeurPortefeuilleShouldSuccess(){
+        //Arrange
+        Portefeuille portefeuille = new Portefeuille();
+            //création et enregistrement de la valeur de l'action1 avec une valeur de 1
+            ActionSimple action1 = new ActionSimple("Action1");
+            action1.enrgCours(DEFAULT_DAY, 1);
+            float valeur1 = action1.valeur(DEFAULT_DAY);
+            //création et enregistrement de la valeur de l'action2 avec une valeur de 2
+            ActionSimple action2 = new ActionSimple("Action2");
+            action2.enrgCours(DEFAULT_DAY, 2);
+            float valeur2 = action2.valeur(DEFAULT_DAY);
+        
+        //Action 
+            //création du portefeuille et consulation de sa valeur 
+            portefeuille.acheter(action1, 1);
+            portefeuille.acheter(action2, 1);
+            float valeurPortefeuille = portefeuille.valeur(DEFAULT_DAY);
+        
+        //Assert
+        Assertions.assertEquals(valeurPortefeuille, (valeur1 + valeur2), "La somme des valeurs des actions détenues n'égalent pas la valeur du portefeuille"); //égalité de valeur 
+    }
+    
     @Test
     public void testValeurPortefeuilleShouldFail(){
         //Arrange
@@ -204,8 +204,10 @@ public class PortefeuilleTest {
             portefeuille.acheter(action1, 1);
             portefeuille.acheter(action2, 1);
             
-            final String expectedMessage = "le cours pour "+INCORRECT_DAY.toString()+" n'est pas encore enregistré";
-            IllegalArgumentException assertThrowsExactly = Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
+            final String expectedMessage = "le cours pour "
+                    +INCORRECT_DAY.toString()+" n'est pas encore enregistré";
+            IllegalArgumentException assertThrowsExactly = 
+                    Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
                 portefeuille.valeur(INCORRECT_DAY);
             });
         
