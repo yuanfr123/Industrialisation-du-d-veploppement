@@ -37,6 +37,7 @@ public class ActionComposee extends Action {
     }
     
     /**
+     * @author Rs yinc
      * voir la compostion dune action composee
      * @return composition as string
      */
@@ -52,6 +53,7 @@ public class ActionComposee extends Action {
         }
         return sb.toString();
     }
+  
 
     @Override
     public float valeur(Jour j) {

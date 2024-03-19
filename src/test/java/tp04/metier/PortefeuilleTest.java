@@ -24,6 +24,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -33,8 +34,46 @@ public class PortefeuilleTest {
     Jour DEFAULT_DAY = new Jour(1,1);
     Jour INCORRECT_DAY = new Jour(2,1);
     
+    Jour jourActuelle = new Jour(2024, 18);
+    
+    ActionSimple action1TestValueUp = new ActionSimple("Action1");
+    ActionSimple action2TestValueUp = new ActionSimple("Action2");
+    
+    ActionSimple action3TestValueDown = new ActionSimple("Action3");
+    ActionSimple action4TestValueDown = new ActionSimple("Action4");
+        
+
+    
     
     public PortefeuilleTest(){
+    }
+    
+    
+    /**
+     * @author Rs yinc
+     * mettre les valeurs des actions pour le jour actuel, precedent et de la semaine precedente
+     */
+    @BeforeEach
+    public void setUp() {
+        action1TestValueUp.enrgCours(jourActuelle, 4);
+        action1TestValueUp.enrgCours(new Jour(2024,17), 1);
+        action1TestValueUp.enrgCours(new Jour(2024,11), 1);
+
+        
+        action2TestValueUp.enrgCours(jourActuelle, 2);
+        action2TestValueUp.enrgCours(new Jour(2024,17), 1);
+        action2TestValueUp.enrgCours(new Jour(2024,11), 1);
+        
+        action3TestValueDown.enrgCours(jourActuelle, 4);
+        action3TestValueDown.enrgCours(new Jour(2024,17), 8);
+        action3TestValueDown.enrgCours(new Jour(2024,11), 8);
+
+        
+        action4TestValueDown.enrgCours(jourActuelle, 2);
+        action4TestValueDown.enrgCours(new Jour(2024,17), 9);
+        action4TestValueDown.enrgCours(new Jour(2024,11), 9);
+        
+       
     }
 
     @Test
@@ -228,4 +267,81 @@ public class PortefeuilleTest {
         Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
     }
     
+    /**
+     * @author Rs yinc
+     *Visualiser l evolution de la valeur du portefeuille par rapport a la veille (evolution positive)
+     */
+    @Test
+    public void testEvaluationUpPortefeuilleVeille() {
+        Portefeuille portefeuille = new Portefeuille();
+            //création et enregistrement de la valeur de l'action1 avec une valeur de 1
+          
+            portefeuille.acheter(action1TestValueUp, 1);
+            portefeuille.acheter(action2TestValueUp, 1);
+            
+            String expectedMsg = "Evolution de la valeur du portefeuille: \n" + 
+                    "valeur au Jour{annee=2024, noJour=17}: 2.0\n" +
+                    "valeur au Jour{annee=2024, noJour=18}: 6.0\n"+
+                    "Evolution : 200.0% ↑";
+            
+            Assertions.assertEquals(expectedMsg, portefeuille.afficherEvolutionVeille(jourActuelle));
+
+    }
+    
+    /**
+     * @author Rs yinc
+     * Visualiser l evolution de la valeur du portefeuille par rapport a la veille (evolution negative)
+     */
+    @Test
+    public void testEvaluationDownPortefeuilleVeille() {
+        Portefeuille portefeuille = new Portefeuille();
+            portefeuille.acheter(action3TestValueDown, 1);
+            portefeuille.acheter(action4TestValueDown, 1);
+            
+            String expectedMsg = "Evolution de la valeur du portefeuille: \n" + 
+                    "valeur au Jour{annee=2024, noJour=17}: 17.0\n" +
+                    "valeur au Jour{annee=2024, noJour=18}: 6.0\n"+
+                    "Evolution : -64.71% ↓";
+            
+            Assertions.assertEquals(expectedMsg, portefeuille.afficherEvolutionVeille(jourActuelle));
+
+    }
+    
+    /**
+     * @author Rs yinc
+     *Visualiser l evolution de la valeur du portefeuille par rapport a la semaine derniere (evolution positive)
+     */
+    @Test
+    public void testEvaluationUpPortefeuilleSemaine() {
+        Portefeuille portefeuille = new Portefeuille();
+            portefeuille.acheter(action1TestValueUp, 1);
+            portefeuille.acheter(action2TestValueUp, 1);
+            
+            String expectedMsg = "Evolution de la valeur du portefeuille: \n" + 
+                    "valeur au Jour{annee=2024, noJour=11}: 2.0\n" +
+                    "valeur au Jour{annee=2024, noJour=18}: 6.0\n"+
+                    "Evolution : 200.0% ↑";
+            
+            Assertions.assertEquals(expectedMsg, portefeuille.afficherEvolutionSemaine(jourActuelle));
+
+    }
+    
+    /**
+     * @author Rs yinc
+     *Visualiser l evolution de la valeur du portefeuille par rapport a la semaine derniere (evolution negative)
+     */
+    @Test
+    public void testEvaluationDownPortefeuilleSemaine() {
+        Portefeuille portefeuille = new Portefeuille();
+            portefeuille.acheter(action3TestValueDown, 1);
+            portefeuille.acheter(action4TestValueDown, 1);
+            
+            String expectedMsg = "Evolution de la valeur du portefeuille: \n" + 
+                    "valeur au Jour{annee=2024, noJour=11}: 17.0\n" +
+                    "valeur au Jour{annee=2024, noJour=18}: 6.0\n"+
+                    "Evolution : -64.71% ↓";
+            
+            Assertions.assertEquals(expectedMsg, portefeuille.afficherEvolutionSemaine(jourActuelle));
+
+    }
 }

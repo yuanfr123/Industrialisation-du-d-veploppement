@@ -22,7 +22,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 /**
  *
- * @author yinchenwang
+ * @author Rs yinc
  */
 
 public class ActionComposeTest {
@@ -35,14 +35,34 @@ public class ActionComposeTest {
     
    private ActionComposee  franceTV = new ActionComposee("FranceTV");
    
+   Jour jourActuelle = new Jour(2024, 1);
+   
+   /**
+    *@author Rs yinc
+    *enregistrer le cours des actions simples a differentes dates
+    *enregistrer la composition de l action composee
+    */
    @BeforeEach
     public void setUp() {
      
-        france2.enrgCours(new Jour(2024, 20), 30.2f);
-        france4.enrgCours(new Jour(2024, 20), 32.3f);
+        france2.enrgCours(jourActuelle, 30.2f);
+        france2.enrgCours(new Jour(2023, 365), 29.2f);
+        france2.enrgCours(new Jour(2023, 359), 28.2f);
+       
+        
+        france4.enrgCours(jourActuelle, 32.3f);
+        france4.enrgCours(new Jour(2023, 365), 34.3f);
+        france4.enrgCours(new Jour(2023, 359), 38.3f);
+        
+        // Créer une action composée
+       franceTV.enrgComposition(france4, 0.50f);
+       franceTV.enrgComposition(france2, 0.50f);
+
+
     }
     
     /**
+     * @author Rs yinc
      * afficher la composition d'une action composee
      * 1) creation 2 action simple.
      * 2) creation  d'une action composee.
@@ -51,13 +71,6 @@ public class ActionComposeTest {
      */
     @Test
     public void testConsulterCompositionActionComposee() {
-        
-        // Créer une action composée
-       franceTV.enrgComposition(france4, 0.50f);
-       franceTV.enrgComposition(france2, 0.50f);
-       
-       
-
         // Vérifier que la composition de l'action composée est correcte
         String compositionAttendue = "voici la composition de cette action: \n" +
                                       "Action: france 4, Composition: 50.0\n" +
@@ -66,6 +79,7 @@ public class ActionComposeTest {
     }
     
     /**
+     * @author Rs yinc
      * test achat action composee
      * 1) creation 2 action simple.
      * 2) creation  d'une action composee.
@@ -75,13 +89,7 @@ public class ActionComposeTest {
      */
     @Test
     public void testAcheterActionComposee() {
-        
-  
-       franceTV.enrgComposition(france4, 0.50f);
-       franceTV.enrgComposition(france2, 0.50f);
-       
-       
-       
+
        portefeuille.acheter(franceTV, 3);
        
        portefeuille.acheter(france2, 5);
@@ -97,6 +105,7 @@ public class ActionComposeTest {
     }
     
     /**
+     * @author Rs yinc
      * test definition achat d'actions avec une qte non autorisee
      * 
      */
@@ -115,6 +124,7 @@ public class ActionComposeTest {
     
     
     /**
+     * @author Rs yinc
      * test achat d'actions avec une qte autorisee
      */
     @Test
@@ -133,6 +143,7 @@ public class ActionComposeTest {
     
     
     /**
+     * @author Rs yinc
      * test definition composition avec un pourcentage negatif
      */
     @Test
@@ -148,14 +159,14 @@ public class ActionComposeTest {
     }
     
     /**
+     * @author Rs yinc
      * test definition composition avec un pourcentage positif
      */
     @Test
     protected void testConstructorParametersAreCorrectSuccess() {
        
-        franceTV.enrgComposition(france2, 0.50f);
-        
         String expectedMsg = "voici la composition de cette action: \n" +
+                                      "Action: france 4, Composition: 50.0\n" +
                                       "Action: france 2, Composition: 50.0\n";
         //Action
         final String currentComposition = franceTV.consulterComposition();
@@ -164,5 +175,40 @@ public class ActionComposeTest {
         //Assert
         Assertions.assertEquals(expectedMsg, currentComposition);
     }
+    
+    /**
+     * @author Rs yinc
+     *visualisation evolution de la valeur d une action composee par rapport a la veille avec le jour actuel etant le 1er jour de lannee
+     */
+     @Test
+    public void testEvaluationActionComposeVeille() {
+            
+        String expectedMsg = "Evolution de la valeur de l'action: \n" + 
+                "valeur au Jour{annee=2023, noJour=365}: 31.75\n" +
+                "valeur au Jour{annee=2024, noJour=1}: 31.25\n"+
+                "Evolution : -1.57% ↓";
+
+        Assertions.assertEquals(expectedMsg, franceTV.evolutionValeurVeilleAction(jourActuelle));
+
+    }
+    
+  
+    /**
+     * @author Rs yinc
+     *visualisation evolution de la valeur d une action composee par rapport a la semaine precedente avec le jour actuel etant le 1er jour de lannee
+     */
+     @Test
+    public void testEvaluationActionComposeSemaine() {
+            
+        String expectedMsg = "Evolution de la valeur de l'action: \n" + 
+                "valeur au Jour{annee=2023, noJour=359}: 33.25\n" +
+                "valeur au Jour{annee=2024, noJour=1}: 31.25\n"+
+                "Evolution : -6.02% ↓";
+
+        Assertions.assertEquals(expectedMsg, franceTV.evolutionValeurSemaineAction(jourActuelle));
+
+    }
+    
+ 
 
 }
