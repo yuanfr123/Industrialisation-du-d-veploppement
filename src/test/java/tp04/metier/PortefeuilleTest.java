@@ -39,6 +39,7 @@ public class PortefeuilleTest {
 
     @Test
     /**
+     * RY
      * Méthode de test:
      * Le portfeuille exist.
      * HashMap doit être manipulable.
@@ -58,6 +59,7 @@ public class PortefeuilleTest {
     
     @Test
     /**
+     * YR
     *Testez la vente d'actions quand vous avez autant d'actions (pas également).
     */
     public void testVendreSuccess(){
@@ -79,6 +81,7 @@ public class PortefeuilleTest {
     
     @Test
     /**
+     * YR
     *Testez la vente d'actions quand vous avez autant d'actions (également).
     */
     public void testVendreSuccessTous(){
@@ -100,6 +103,7 @@ public class PortefeuilleTest {
     
     @Test
     /**
+     * YR
     *Testez la vente d'actions quand vous n'avez pas autant d'actions.
     */
     public void testVendreFailSuperieur(){
@@ -121,6 +125,7 @@ public class PortefeuilleTest {
     }
     @Test
     /**
+     * YR
     *Testez la vente d'actions quand vous n'avez pas d'actions.
     */
         public void testVendreFailNePossederPas(){
@@ -141,7 +146,8 @@ public class PortefeuilleTest {
     
     @Test
      /**
-     * on test pour visualiser le portefeuille
+      * YR
+     * on test pour visualiser le portefeuille.
      */
     public void testVisuelToString() {
         // Arrange 
@@ -161,6 +167,7 @@ public class PortefeuilleTest {
     
     @Test 
     /**
+     * RY
      *on test pour un jour donnée la valeur du portefeuille.
      *les actions et le portfeuille sont paramétrés pour le même jour.
      */
@@ -187,6 +194,11 @@ public class PortefeuilleTest {
     }
     
     @Test
+    /**
+     * RY
+     *on test pour un jour donnée la valeur du portefeuille.
+     *les actions et le portfeuille sont paramétrés pour un jour différent.
+     */
     public void testValeurPortefeuilleShouldFail(){
         //Arrange
         Portefeuille portefeuille = new Portefeuille();

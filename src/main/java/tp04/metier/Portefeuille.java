@@ -49,13 +49,16 @@ public class Portefeuille {
             return Integer.toString(qte);
         }
     }
-
+/**
+ *La création de portefeuille implique la création de la collection des actions sous la forme de hashmap.
+ * @author Tout le groupe.
+ */
     public Portefeuille() {
         this.mapLignes = new HashMap();
     }
     
     /**
-     * R&Y.
+     * RY.
      * Méthode qui rend le hashMap des actions et qte contenu dans le portefeuille
      * @return hashMap
      */
@@ -74,7 +77,7 @@ public class Portefeuille {
         }
     }
     /**
-     * Y&R.
+     * YR.
      * Méthode qui rend la valeur globale contenu dans le portefeuille;
      * @param a Action
      * @param q int
@@ -95,15 +98,15 @@ public class Portefeuille {
         }
     }
     /**
-     * Y&R.
-     * Méthode qui rend la valeur globale contenu dans le portefeuille;
+     * YR.
+     * Méthode qui rend la contenu dans le portefeuille;
      * @return a string representation of this Portefeuille
      */
     public String toString() {
         return this.mapLignes.toString();
     }
     /**
-     * R&Y.
+     * RY.
      * Méthode qui rend la valeur globale contenu dans le portefeuille;
      * @param j jour
      * @return total en float
