@@ -64,7 +64,5 @@ public class ActionComposee extends Action {
 
         return valeur;
     }
-    
-   
 
 }
