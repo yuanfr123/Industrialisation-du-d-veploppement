@@ -19,7 +19,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-/**
+/** Afin d'effectuer nos tests,
+ * Nous définissons un jour valide,
+ * une valeur float valide et une invalide,
+ * un libellé String valide et un invalide
  *
  * @author groupe 1;
  */
@@ -27,8 +30,6 @@ public class ActionSimpleTest {
 
     private static final Jour DEFAULT_j = new Jour(1,2000);
     private static final float DEFAULT_VALUE = 1.0f;
-    private static final int INCORRECT_DAY = 0;
-    private static final int INCORRECT_YEAR = 0;
     private static final String DEFAULT_LIB = "France 2";
     private static final String INCORRECT_LIB = "";
     private static final int INCORRECT_VALUE = -1;
@@ -62,7 +63,8 @@ public class ActionSimpleTest {
     public ActionSimpleTest() {
     }
     /**
-     * Test vérifiant qu'une action se crée lorsque les paramètres sont bons
+     * Test vérifiant qu'une action se crée lorsque 
+     * les paramètres sont bons
      */
     @Test
     protected void testConstructorParametersAreCorrectSuccess() {
@@ -78,7 +80,8 @@ public class ActionSimpleTest {
     }
     
     /**
-     * Test vérifiant qu'une action ne se crée pas avec un libellé invalide
+     * Test vérifiant qu'une action ne se crée pas 
+     * avec un libellé invalide
      */
     @Test
     protected void testConstructorLibIncorrectShouldFail() {
@@ -94,7 +97,9 @@ public class ActionSimpleTest {
     }
     
     /**
-     * Test pour l'enregistrement d'un cours avec une valeur négative qui doit renvoyer une erreur
+     * Test pour l'enregistrement d'un cours 
+     * avec une valeur négative 
+     * qui doit renvoyer une erreur
      */
     @Test
     protected void testenrgCoursValueIncorrectShouldFail() {
@@ -110,8 +115,9 @@ public class ActionSimpleTest {
     }
     
     /**
-     * 
-     * Test pour l'enregistrement d'un cours un jour ou le cours a déja été enregistré, doit renvoyer une erreur
+     * Test pour l'enregistrement d'un cours 
+     * un jour ou le cours a déja été enregistré, 
+     * doit renvoyer une erreur
      */
     @Test
     protected void testenrgCoursDayIncorrectShouldFail() {
@@ -146,15 +152,15 @@ public class ActionSimpleTest {
     }
     
     /**
-     * @author Rs yinc
-     * Test pour un jour ou la valeur du cours n'est pas définie, doir renvoyer 0
+     * Test pour un jour ou la valeur du cours n'est pas définie, 
+     * doir renvoyer une erreur
      */
     @Test
     protected void testValeurDayIncorrectShouldFail() {
         //Arrange
         final String expectedMessage = "le cours pour "+DEFAULT_j.toString()+" n'est pas encore enregistré";
-        //Action and asserts
         final ActionSimple act = new ActionSimple(DEFAULT_LIB);
+        //Action and asserts
         IllegalArgumentException assertThrowsExactly = Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
             act.valeur(DEFAULT_j);
         });

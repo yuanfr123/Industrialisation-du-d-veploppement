@@ -1,4 +1,4 @@
-tp04/metier/ActionComposeTest.class
-tp04/metier/PortefeuilleTest.class
-tp04/metier/JourTest.class
-tp04/metier/ActionSimpleTest.class
+tp04\metier\PortefeuilleTest.class
+tp04\metier\ActionSimpleTest.class
+tp04\metier\ActionComposeTest.class
+tp04\metier\JourTest.class
