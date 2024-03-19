@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  *
- * @author somebody
+ * @author groupe 1
  */
 public class ActionSimple extends Action {
 
@@ -50,18 +50,21 @@ public class ActionSimple extends Action {
                 this.mapCours.put(j, new Cours(j, v));
             }
             else {
-                throw new IllegalArgumentException("on ne peut pas enregistrer un cours négatif pour l'action "+ this.getLibelle());
+                throw new IllegalArgumentException("on ne peut pas enregistrer"
+                        + " un cours négatif pour l'action "+ this.getLibelle());
             }
         }
         else {
-            throw new IllegalArgumentException("le cours pour "+this.getLibelle()+" est déja enregistré a cette date");
+            throw new IllegalArgumentException("le cours pour "+this.getLibelle()
+                    +" est déja enregistré a cette date");
         }
              
     }
 
     /**
      * consulter la valeur de l'action pour un jour donné
-     * @param j représente le jour pour lequel nous voulons savoir la valeur de l'action
+     * @param j représente le jour pour lequel 
+     * nous voulons savoir la valeur de l'action
      * @return un float représentanrt la valeur de l'action ce jour là
      */
     @Override
@@ -69,8 +72,8 @@ public class ActionSimple extends Action {
         if (this.mapCours.containsKey(j) == true) {
             return this.mapCours.get(j).getValeur();
         } else {
-            throw new IllegalArgumentException("le cours pour "+j.toString()+" n'est pas encore enregistré");
+            throw new IllegalArgumentException("le cours pour "+j.toString()
+                    +" n'est pas encore enregistré");
         }
     }
-    
 }

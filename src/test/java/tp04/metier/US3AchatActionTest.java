@@ -21,10 +21,10 @@ import org.junit.jupiter.api.Test;
 /**
  * Nous définissons un portefeuille de test
  * ainsi qu'une action de test qui sera achetée
- * @author ldasi
+ * @author groupe 1
  */
 public class US3AchatActionTest {
-   private static final Portefeuille portefeuille = new Portefeuille();
+   private final Portefeuille portefeuille = new Portefeuille();
    
    private static final ActionSimple france2 = new ActionSimple("france 2");
 
@@ -75,7 +75,8 @@ public class US3AchatActionTest {
         //Arrange
         final String expectedMessage = "achter au moins une action";
         //Action and asserts
-        IllegalArgumentException assertThrowsExactly = Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
+        IllegalArgumentException assertThrowsExactly = 
+                Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
             portefeuille.acheter(france2, 0);
         });
         final String currentMessage = assertThrowsExactly.getMessage();
