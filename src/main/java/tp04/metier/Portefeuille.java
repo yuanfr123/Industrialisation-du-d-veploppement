@@ -49,7 +49,7 @@ public class Portefeuille {
     }
     
     /**
-     * R&Y
+     * R&Y;
      * Méthode qui rend le hashMap des actions et qte contenu dans le portefeuille
      * @return hashMap
      */
@@ -67,7 +67,12 @@ public class Portefeuille {
             this.mapLignes.get(a).setQte(this.mapLignes.get(a).getQte() + q);
         }
     }
-
+    /**
+     * R&Y;
+     * Méthode qui rend la valeur globale contenu dans le portefeuille;
+     * @param a Action, q int
+     * @return visualisation en string
+     */
     public void vendre(Action a, int q) throws IllegalArgumentException{
         if (this.mapLignes.containsKey(a) == true) {
             if (this.mapLignes.get(a).getQte() > q) {
@@ -82,13 +87,17 @@ public class Portefeuille {
             throw new IllegalArgumentException("Ne peut pas vendre les actions qu'on n'possède pas.");
         }
     }
-
+    /**
+     * R&Y;
+     * Méthode qui rend la valeur globale contenu dans le portefeuille;
+     * @return visualisation en string
+     */
     public String toString() {
         return this.mapLignes.toString();
     }
     /**
-     * R&Y
-     * Méthode qui rend la valeur globale contenu dans le portefeuille
+     * R&Y;
+     * Méthode qui rend la valeur globale contenu dans le portefeuille;
      * @param j jour
      * @return valeur totale en float
      */
