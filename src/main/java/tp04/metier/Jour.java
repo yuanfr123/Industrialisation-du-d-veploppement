@@ -39,7 +39,7 @@ public class Jour {
 
     
     /**
-     * 
+     * @author Rs yinc
      * @return le jour precedent a un jour donne
      */
     public Jour jourPrecedent() {
@@ -56,8 +56,8 @@ public class Jour {
     }
     
     /**
-     * 
-     * @return la semaine precedent a un jour donne
+     * @author Rs yinc
+     * @return le jour qui se situe exactement une semaine avant un jour donné.
      */
     public Jour semainePrecedente() {
         int nouveauJour = this.getNoJour() - 7;
@@ -72,7 +72,12 @@ public class Jour {
         return new Jour(nouvelleAnnee, nouveauJour);
     }
 
-
+    
+    /**
+     * @author Rs yinc
+     * @param annee que l on souhaite le nombre de jours
+     * @return nombre de jours dans une annee
+     */
     private static int nbJoursDansAnnee(int annee) {
         return (annee % 4 == 0 && (annee % 100 != 0 || annee % 400 == 0)) ? 366 : 365;
     }

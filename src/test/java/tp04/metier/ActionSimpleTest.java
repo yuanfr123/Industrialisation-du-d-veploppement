@@ -16,6 +16,7 @@
 package tp04.metier;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -32,6 +33,32 @@ public class ActionSimpleTest {
     private static final String INCORRECT_LIB = "";
     private static final int INCORRECT_VALUE = -1;
 
+    private ActionSimple france2 = new ActionSimple("france 2");
+   
+    private ActionSimple france4 = new ActionSimple("france 4");
+   
+    Jour jourActuelle = new Jour(2024, 5);
+
+    /**
+     * @author Rs yinc
+     *enregistrement des cours des actions simples afin de tester les evaluations de valeurs par rapport a la veille et la semaine pasee
+     */
+    @BeforeEach
+    public void setUp() {
+     
+        france2.enrgCours(jourActuelle, 30.2f);
+        france2.enrgCours(new Jour(2024, 4), 29.2f);
+        france2.enrgCours(new Jour(2023, 363), 28.2f);
+        
+        
+        france4.enrgCours(jourActuelle, 32.3f);
+        france4.enrgCours(new Jour(2024, 4), 34.3f);
+        france4.enrgCours(new Jour(2023, 363), 38.3f);
+
+
+    }
+    
+    
     public ActionSimpleTest() {
     }
     /**
@@ -83,6 +110,7 @@ public class ActionSimpleTest {
     }
     
     /**
+     * 
      * Test pour l'enregistrement d'un cours un jour ou le cours a déja été enregistré, doit renvoyer une erreur
      */
     @Test
@@ -100,6 +128,7 @@ public class ActionSimpleTest {
     }
     
     /**
+     * 
      * Test du retour lorsque l'on veut accéder a la valeur d'un cours pour un jour
      */
     @Test
@@ -117,6 +146,7 @@ public class ActionSimpleTest {
     }
     
     /**
+     * @author Rs yinc
      * Test pour un jour ou la valeur du cours n'est pas définie, doir renvoyer 0
      */
     @Test
@@ -130,6 +160,69 @@ public class ActionSimpleTest {
         });
         final String currentMessage = assertThrowsExactly.getMessage();
         Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
+    }
+    
+    /**
+     * @author Rs yinc
+     * visualisation evolution de la valeur d une action simple par rapport a la veille (evolution positive)
+     */
+    @Test
+    public void testEvaluationUpActionSimpleVeille() {
+            
+        String expectedMsg = "Evolution de la valeur de l'action: \n" + 
+                "valeur au Jour{annee=2024, noJour=4}: 29.2\n" +
+                "valeur au Jour{annee=2024, noJour=5}: 30.2\n"+
+                "Evolution : 3.42% ↑";
+
+        Assertions.assertEquals(expectedMsg, france2.evolutionValeurVeilleAction(jourActuelle));
+
+    }
+    /**
+     * @author Rs yinc
+     * visualisation evolution de la valeur d une action simple par rapport a la veille (evolution negative)
+     */
+    @Test
+    public void testEvaluationDownActionSimpleVeille() {
+            
+        String expectedMsg = "Evolution de la valeur de l'action: \n" + 
+                "valeur au Jour{annee=2024, noJour=4}: 34.3\n" +
+                "valeur au Jour{annee=2024, noJour=5}: 32.3\n"+
+                "Evolution : -5.83% ↓";
+
+        Assertions.assertEquals(expectedMsg, france4.evolutionValeurVeilleAction(jourActuelle));
+
+    }
+    
+    /**
+     * @author Rs yinc
+     * visualisation evolution de la valeur d une action simple par rapport a la semaine passee (evolution positive)
+     */
+     @Test
+    public void testEvaluationUpActionSimpleSemaine() {
+            
+        String expectedMsg = "Evolution de la valeur de l'action: \n" + 
+                "valeur au Jour{annee=2023, noJour=363}: 28.2\n" +
+                "valeur au Jour{annee=2024, noJour=5}: 30.2\n"+
+                "Evolution : 7.09% ↑";
+
+        Assertions.assertEquals(expectedMsg, france2.evolutionValeurSemaineAction(jourActuelle));
+
+    }
+    
+    /**
+     * @author Rs yinc
+     * visualisation evolution de la valeur d une action simple par rapport a la semaine passee (evolution negative)
+     */
+    @Test
+    public void testEvaluationDownActionSimpleSemaine() {
+            
+        String expectedMsg = "Evolution de la valeur de l'action: \n" + 
+                "valeur au Jour{annee=2023, noJour=363}: 38.3\n" +
+                "valeur au Jour{annee=2024, noJour=5}: 32.3\n"+
+                "Evolution : -15.67% ↓";
+
+        Assertions.assertEquals(expectedMsg, france4.evolutionValeurSemaineAction(jourActuelle));
+
     }
     
     

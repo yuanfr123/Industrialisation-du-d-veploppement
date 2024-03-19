@@ -97,7 +97,7 @@ public class Portefeuille {
     }
     
     /**
-     * 
+     * @author Rs yinc
      * @param j jour actuelle
      * @return l'evolution de la valeur par rapport a la veille;
      */
@@ -111,17 +111,26 @@ public class Portefeuille {
         
         sb.append("valeur au ").append(j.toString()).append(": ").append(this.valeur(j)).append("\n");
         
+        double variationPourcentage = (((this.valeur(j) - this.valeur(veille)) / this.valeur(veille)) * 100);
+        double variationArrondie = Math.round(variationPourcentage * 100.0) / 100.0;
+
+        
         if (this.valeur(j) > this.valeur(veille)) {
-            sb.append("Evolution : ").append((((this.valeur(j) - this.valeur(veille)) / this.valeur(veille))) * 100).append("% ↑");
+            sb.append("Evolution : ").append(variationArrondie).append("% ↑");
             return sb.toString();
         }
-        sb.append("Evolution : ").append((((this.valeur(j) - this.valeur(veille)) / this.valeur(veille))) * 100).append("% ↓");
+        sb.append("Evolution : ").append(variationArrondie).append("% ↓");
 
         
         return sb.toString();
         
     }
     
+    /**
+     * @author Rs yinc
+     * @param j jour actuelle
+     * @return l'evolution de la valeur par rapport a la semaine precedente;
+     */
     public String afficherEvolutionSemaine(Jour j) {
         Jour semainePrecedente = j.semainePrecedente();
         StringBuilder sb = new StringBuilder();
@@ -132,12 +141,15 @@ public class Portefeuille {
         
         sb.append("valeur au ").append(j.toString()).append(": ").append(this.valeur(j)).append("\n");
         
+        double variationPourcentage = (((this.valeur(j) - this.valeur(semainePrecedente)) / this.valeur(semainePrecedente)) * 100);
+        double variationArrondie = Math.round(variationPourcentage * 100.0) / 100.0;
+        
         if (this.valeur(j) > this.valeur(semainePrecedente)) {
-            sb.append("Evolution : ").append((this.valeur(j) - this.valeur(semainePrecedente)) / 100).append("↑");
+            sb.append("Evolution : ").append(variationArrondie).append("% ↑");
             return sb.toString();
         }
        
-        sb.append("Evolution : ").append((this.valeur(j) - this.valeur(semainePrecedente)) / 100).append("↓");
+        sb.append("Evolution : ").append(variationArrondie).append("% ↓");
         return sb.toString();
         
     }
