@@ -9,13 +9,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
- * @author somebody
+ *Cette classe représente un portefeuille d'actions, où chaque action est associée à une quantité spécifique.
+ * @author Tout le groupe.
  */
 public class Portefeuille {
 
     Map<Action, LignePortefeuille> mapLignes;
-
+/**
+ * Une collection d'objets, où chaque objet représente une ligne contenant une action et sa quantité correspondante.
+ * @author Tout le groupe.
+ */
     private class LignePortefeuille {
 
         private Action action;
@@ -38,7 +41,10 @@ public class Portefeuille {
             this.action = action;
             this.qte = qte;
         }
-
+    /**
+     * Méthode qui rend le contenu de la collection;
+     * @return a string representation of this LignePortefeuille
+     */
         public String toString() {
             return Integer.toString(qte);
         }
@@ -49,7 +55,7 @@ public class Portefeuille {
     }
     
     /**
-     * R&Y;
+     * R&Y.
      * Méthode qui rend le hashMap des actions et qte contenu dans le portefeuille
      * @return hashMap
      */
@@ -68,9 +74,10 @@ public class Portefeuille {
         }
     }
     /**
-     * R&Y;
+     * Y&R.
      * Méthode qui rend la valeur globale contenu dans le portefeuille;
-     * @param a Action, q int
+     * @param a Action
+     * @param q int
      * @return visualisation en string
      */
     public void vendre(Action a, int q) throws IllegalArgumentException{
@@ -88,18 +95,18 @@ public class Portefeuille {
         }
     }
     /**
-     * R&Y;
+     * Y&R.
      * Méthode qui rend la valeur globale contenu dans le portefeuille;
-     * @return visualisation en string
+     * @return a string representation of this Portefeuille
      */
     public String toString() {
         return this.mapLignes.toString();
     }
     /**
-     * R&Y;
+     * R&Y.
      * Méthode qui rend la valeur globale contenu dans le portefeuille;
      * @param j jour
-     * @return valeur totale en float
+     * @return total en float
      */
     public float valeur(Jour j) throws IllegalArgumentException{
         float total = 0;
