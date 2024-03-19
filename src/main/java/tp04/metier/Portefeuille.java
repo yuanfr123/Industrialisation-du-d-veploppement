@@ -81,7 +81,6 @@ public class Portefeuille {
      * Méthode qui rend la valeur globale contenu dans le portefeuille;
      * @param a Action
      * @param q int
-     * @return visualisation en string
      */
     public void vendre(Action a, int q) throws IllegalArgumentException{
         if (this.mapLignes.containsKey(a) == true) {
