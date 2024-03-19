@@ -58,9 +58,8 @@ public class PortefeuilleTest {
     
     @Test 
     /**
-     * on test pour un jour donnée la valeur du portefeuille
-     * les actions et le portfeuille sont paramétrés pour le même jour 
-     * 
+     *on test pour un jour donnée la valeur du portefeuille.
+     *les actions et le portfeuille sont paramétrés pour le même jour.
      */
     protected void testValeurPortefeuilleShouldSuccess(){
         //Arrange
@@ -82,33 +81,6 @@ public class PortefeuilleTest {
         
         //Assert
         Assertions.assertEquals(valeurPortefeuille, (valeur1 + valeur2), "La somme des valeurs des actions détenues n'égalent pas la valeur du portefeuille"); //égalité de valeur 
-    }
-    @Test
-    public void testValeurPortefeuilleShouldFail(){
-        //Arrange
-        Portefeuille portefeuille = new Portefeuille();
-            //création et enregistrement de la valeur de l'action1 avec une valeur de 1
-            ActionSimple action1 = new ActionSimple("Action1");
-            action1.enrgCours(DEFAULT_DAY, 1);
-            float valeur1 = action1.valeur(DEFAULT_DAY);
-            //création et enregistrement de la valeur de l'action2 avec une valeur de 2
-            ActionSimple action2 = new ActionSimple("Action2");
-            action2.enrgCours(DEFAULT_DAY, 2);
-            float valeur2 = action2.valeur(DEFAULT_DAY);
-        
-        //Action 
-            //création du portefeuille et consulation de sa valeur 
-            portefeuille.acheter(action1, 1);
-            portefeuille.acheter(action2, 1);
-            float valeurPortefeuille = portefeuille.valeur(INCORRECT_DAY);
-            final String expectedMessage = "le cours pour "+INCORRECT_DAY.toString()+" n'est pas encore enregistré";
-            IllegalArgumentException assertThrowsExactly = Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
-                portefeuille.valeur(INCORRECT_DAY);
-            });
-        
-        //Assert
-        final String currentMessage = assertThrowsExactly.getMessage();
-        Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
     }
     
     @Test
@@ -174,6 +146,25 @@ public class PortefeuilleTest {
         
         assertEquals("Vous n'avez pas autant d'actions.",exception.getMessage());
     }
+    @Test
+    /**
+    *Testez la vente d'actions quand vous n'avez pas d'actions.
+    */
+        public void testVendreFailNePossederPas(){
+        // Arrange 
+        Action action1 = new ActionSimple("AAPL");
+        Action action2 = new ActionComposee("GOOG");
+        
+        //Action 
+        Portefeuille portefeuille = new Portefeuille();
+        portefeuille.acheter(action1, 10);
+        
+        //Assert
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,()->{
+        portefeuille.vendre(action2, 200);});
+        
+        assertEquals("Ne peut pas vendre les actions qu'on n'possède pas.",exception.getMessage());
+    }
     
     @Test
      /**
@@ -194,4 +185,33 @@ public class PortefeuilleTest {
         //Assert Attention : Order des clés alphabétique.
         Assertions.assertEquals("{AAPL=100, GHJG=300, GOOG=200}", portefeuille.toString());
     }
+    
+    @Test
+    public void testValeurPortefeuilleShouldFail(){
+        //Arrange
+        Portefeuille portefeuille = new Portefeuille();
+            //création et enregistrement de la valeur de l'action1 avec une valeur de 1
+            ActionSimple action1 = new ActionSimple("Action1");
+            action1.enrgCours(DEFAULT_DAY, 1);
+            float valeur1 = action1.valeur(DEFAULT_DAY);
+            //création et enregistrement de la valeur de l'action2 avec une valeur de 2
+            ActionSimple action2 = new ActionSimple("Action2");
+            action2.enrgCours(DEFAULT_DAY, 2);
+            float valeur2 = action2.valeur(DEFAULT_DAY);
+        
+        //Action 
+            //création du portefeuille et consulation de sa valeur 
+            portefeuille.acheter(action1, 1);
+            portefeuille.acheter(action2, 1);
+            
+            final String expectedMessage = "le cours pour "+INCORRECT_DAY.toString()+" n'est pas encore enregistré";
+            IllegalArgumentException assertThrowsExactly = Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
+                portefeuille.valeur(INCORRECT_DAY);
+            });
+        
+        //Assert
+        final String currentMessage = assertThrowsExactly.getMessage();
+        Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
+    }
+    
 }

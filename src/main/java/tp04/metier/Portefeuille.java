@@ -79,7 +79,7 @@ public class Portefeuille {
         }
         }
         else{
-            throw new IllegalArgumentException("Ne peut pas vendre les actions qu'on n'a pas.");
+            throw new IllegalArgumentException("Ne peut pas vendre les actions qu'on n'possède pas.");
         }
     }
 
