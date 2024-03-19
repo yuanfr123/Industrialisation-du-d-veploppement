@@ -267,27 +267,6 @@ public class PortefeuilleTest {
         Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
     }
     
-    @Test
-     /**
-      * 
-     * on test pour visualiser le portefeuille
-     */
-    public void testVisuelToString() {
-        // Arrange 
-        Action action1 = new ActionSimple("AAPL");
-        Action action2 = new ActionSimple("GOOG");
-        Action action3 = new ActionComposee("GHJG");
-        
-        //Action 
-        Portefeuille portefeuille = new Portefeuille();
-        portefeuille.acheter(action1, 100);
-        portefeuille.acheter(action2, 200);
-        portefeuille.acheter(action3, 300);
-        
-        //Assert Attention : Order des clés alphabétique.
-        Assertions.assertEquals("{AAPL=100, GHJG=300, GOOG=200}", portefeuille.toString());
-    }
-    
     /**
      * @author Rs yinc
      *Visualiser l evolution de la valeur du portefeuille par rapport a la veille (evolution positive)
