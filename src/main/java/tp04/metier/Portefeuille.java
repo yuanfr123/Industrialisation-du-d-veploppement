@@ -58,7 +58,7 @@ public class Portefeuille {
     }
     
     /**
-     * RY.
+     * @author RY.
      * Méthode qui rend le hashMap des actions et qte contenu dans le portefeuille
      * @return hashMap
      */
@@ -77,7 +77,7 @@ public class Portefeuille {
         }
     }
     /**
-     * YR.
+     * @author YR.
      * Méthode qui rend la valeur globale contenu dans le portefeuille;
      * @param a Action
      * @param q int
@@ -97,7 +97,7 @@ public class Portefeuille {
         }
     }
     /**
-     * YR.
+     * @author YR.
      * Méthode qui rend la contenu dans le portefeuille;
      * @return a string representation of this Portefeuille
      */
@@ -105,7 +105,7 @@ public class Portefeuille {
         return this.mapLignes.toString();
     }
     /**
-     * RY.
+     * @author RY.
      * Méthode qui rend la valeur globale contenu dans le portefeuille;
      * @param j jour
      * @return total en float

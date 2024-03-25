@@ -36,6 +36,11 @@ public class PortefeuilleTest {
     
     Jour jourActuelle = new Jour(2024, 18);
     
+    Action action1 = new ActionSimple("AAPL");
+    Action action2 = new ActionComposee("GOOG");
+    Action action3 = new ActionComposee("GHJG");
+    Action action4 = new ActionSimple("action4");
+    
     ActionSimple action1TestValueUp = new ActionSimple("Action1");
     ActionSimple action2TestValueUp = new ActionSimple("Action2");
     
@@ -46,6 +51,8 @@ public class PortefeuilleTest {
     
     
     public PortefeuilleTest(){
+            ActionSimple actionSimple = (ActionSimple) action1;
+            actionSimple.enrgCours(DEFAULT_DAY, 1);
     }
     
     
@@ -78,7 +85,7 @@ public class PortefeuilleTest {
 
     @Test
     /**
-     * RY
+     *  @author RY
      * Méthode de test:
      * Le portfeuille exist.
      * HashMap doit être manipulable.
@@ -95,21 +102,38 @@ public class PortefeuilleTest {
         assertTrue(mapLignes instanceof Map, "mapLignes should be an instance of HashMap");
         assertTrue(mapLignes.isEmpty(), "mapLignes should be empty initially");//Vide 
     }
+    /**
+     *  @author RY
+     * Méthode générale
+     */
     
+private Portefeuille createPortefeuilleAvecAction(Action action1, Object action2, Object action3, Object action4) {
+    Portefeuille portefeuille = new Portefeuille();
+    portefeuille.acheter(action1, 100);
+
+
+    if (action2 instanceof Action){
+        portefeuille.acheter(this.action2, 200);
+    }
+    if (action3 instanceof Action){
+        portefeuille.acheter(this.action3, 300);
+    }
+    if (action4 instanceof Action){
+        portefeuille.acheter(this.action4, 400);
+    }
+    return portefeuille;
+}
+ 
     @Test
     /**
-     * YR
+     *  @authorYR
     *Testez la vente d'actions quand vous avez autant d'actions (pas également).
     */
     public void testVendreSuccess(){
         // Arrange 
-        Action action1 = new ActionSimple("AAPL");
-        Action action2 = new ActionComposee("GOOG");
+        Portefeuille portefeuille = createPortefeuilleAvecAction(action1, action2,null,null);
         
         //Action 
-        Portefeuille portefeuille = new Portefeuille();
-        portefeuille.acheter(action1, 100);
-        portefeuille.acheter(action2, 200);
         
         portefeuille.vendre(action1, 50);
         portefeuille.vendre(action2, 50);
@@ -120,19 +144,14 @@ public class PortefeuilleTest {
     
     @Test
     /**
-     * YR
+     *  @author YR
     *Testez la vente d'actions quand vous avez autant d'actions (également).
     */
     public void testVendreSuccessTous(){
         // Arrange 
-        Action action1 = new ActionSimple("AAPL");
-        Action action2 = new ActionComposee("GOOG");
+        Portefeuille portefeuille = createPortefeuilleAvecAction(action1, action2,null,null);
         
-        //Action 
-        Portefeuille portefeuille = new Portefeuille();
-        portefeuille.acheter(action1, 100);
-        portefeuille.acheter(action2, 200);
-        
+        //Action         
         portefeuille.vendre(action1, 100);
         portefeuille.vendre(action2, 200);
         
@@ -142,39 +161,32 @@ public class PortefeuilleTest {
     
     @Test
     /**
-     * YR
+     * @author YR
     *Testez la vente d'actions quand vous n'avez pas autant d'actions.
     */
     public void testVendreFailSuperieur(){
         // Arrange 
-        Action action1 = new ActionSimple("AAPL");
-        Action action2 = new ActionComposee("GOOG");
+        Portefeuille portefeuille = createPortefeuilleAvecAction(action1, action2,null,null);
         
         //Action 
-        Portefeuille portefeuille = new Portefeuille();
-        portefeuille.acheter(action1, 10);
-        portefeuille.acheter(action2, 20);
         
         //Assert
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,()->{
-        portefeuille.vendre(action1, 100);
-        portefeuille.vendre(action2, 200);});
+        portefeuille.vendre(action1, 1000);
+        portefeuille.vendre(action2, 2000);});
         
         assertEquals("Vous n'avez pas autant d'actions.",exception.getMessage());
     }
     @Test
     /**
-     * YR
+     * @author YR
     *Testez la vente d'actions quand vous n'avez pas d'actions.
     */
         public void testVendreFailNePossederPas(){
         // Arrange 
-        Action action1 = new ActionSimple("AAPL");
-        Action action2 = new ActionComposee("GOOG");
+        Portefeuille portefeuille = createPortefeuilleAvecAction(action1, null,null,null);
         
         //Action 
-        Portefeuille portefeuille = new Portefeuille();
-        portefeuille.acheter(action1, 10);
         
         //Assert
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,()->{
@@ -185,20 +197,15 @@ public class PortefeuilleTest {
     
     @Test
      /**
-      * YR
+      * @author YR
      * on test pour visualiser le portefeuille.
      */
     public void testVisuelToString() {
         // Arrange 
-        Action action1 = new ActionSimple("AAPL");
-        Action action2 = new ActionSimple("GOOG");
-        Action action3 = new ActionComposee("GHJG");
+        Portefeuille portefeuille = createPortefeuilleAvecAction(action1, action2,action3,null);
         
         //Action 
-        Portefeuille portefeuille = new Portefeuille();
-        portefeuille.acheter(action1, 100);
-        portefeuille.acheter(action2, 200);
-        portefeuille.acheter(action3, 300);
+        
         
         //Assert Attention : Order des clés alphabétique.
         Assertions.assertEquals("{AAPL=100, GHJG=300, GOOG=200}", portefeuille.toString());
@@ -206,11 +213,11 @@ public class PortefeuilleTest {
     
     @Test 
     /**
-     * RY
+     * @author RY
      *on test pour un jour donnée la valeur du portefeuille.
      *les actions et le portfeuille sont paramétrés pour le même jour.
      */
-    protected void testValeurPortefeuilleShouldSuccess(){
+  protected void testValeurPortefeuilleShouldSuccess(){
         //Arrange
         Portefeuille portefeuille = new Portefeuille();
             //création et enregistrement de la valeur de l'action1 avec une valeur de 1
@@ -231,10 +238,11 @@ public class PortefeuilleTest {
         //Assert
         Assertions.assertEquals(valeurPortefeuille, (valeur1 + valeur2), "La somme des valeurs des actions détenues n'égalent pas la valeur du portefeuille"); //égalité de valeur 
     }
+
     
     @Test
     /**
-     * RY
+     * @author RY
      *on test pour un jour donnée la valeur du portefeuille.
      *les actions et le portfeuille sont paramétrés pour un jour différent.
      */
