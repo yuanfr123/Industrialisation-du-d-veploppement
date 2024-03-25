@@ -167,70 +167,66 @@ public class ActionSimpleTest {
         final String currentMessage = assertThrowsExactly.getMessage();
         Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
     }
-    
     /**
-     * @author Rs yinc
-     * visualisation evolution de la valeur d une action simple par rapport a la veille (evolution positive)
+     * Génère le message attendu pour l'évolution de la valeur d'une action simple.
+     * @author RS & Yinc
+     * @param dateJour               La date de la veille ou de la semaine precedente.
+     * @param valeurVeille             La valeur de l'action au jour precedent.
+     * @param valeurActuel           La valeur de l'action au jour actuel.
+     * @param pourcentageEvolution   Le pourcentage d'évolution entre les deux jours.
+     * @param direction              La direction de l'évolution (↑ pour une augmentation, ↓ pour une diminution).
+     * @return Le message formaté représentant l'évolution de la valeur de l'action.
+     */
+    private String getExpectedMessage(String dateJour, double valeurVeille, double valeurActuel, double pourcentageEvolution, String direction) {
+        return "Evolution de la valeur de l'action: \n" +
+                "valeur au " + dateJour + ": " + valeurVeille + "\n" +
+                "valeur au Jour{annee=2024, noJour=5}: " + valeurActuel + "\n" +
+                "Evolution : " + pourcentageEvolution + "% " + direction;
+    }
+
+    /**
+     * @author RS & Yinc
+     * Teste l'évolution de la valeur d'une action simple par rapport à la veille (évolution positive).
      */
     @Test
     public void testEvaluationUpActionSimpleVeille() {
-            
-        String expectedMsg = "Evolution de la valeur de l'action: \n" + 
-                "valeur au Jour{annee=2024, noJour=4}: 29.2\n" +
-                "valeur au Jour{annee=2024, noJour=5}: 30.2\n"+
-                "Evolution : 3.42% ↑";
-
+        String expectedMsg = getExpectedMessage("Jour{annee=2024, noJour=4}", 29.2, 30.2, 3.42, "↑");
         Assertions.assertEquals(expectedMsg, france2.evolutionValeurVeilleAction(jourActuelle));
-
     }
+
     /**
-     * @author Rs yinc
-     * visualisation evolution de la valeur d une action simple par rapport a la veille (evolution negative)
+     * @author RS & Yinc
+     * Teste l'évolution de la valeur d'une action simple par rapport à la veille (évolution négative).
      */
     @Test
     public void testEvaluationDownActionSimpleVeille() {
-            
-        String expectedMsg = "Evolution de la valeur de l'action: \n" + 
-                "valeur au Jour{annee=2024, noJour=4}: 34.3\n" +
-                "valeur au Jour{annee=2024, noJour=5}: 32.3\n"+
-                "Evolution : -5.83% ↓";
-
+        String expectedMsg = getExpectedMessage("Jour{annee=2024, noJour=4}", 34.3, 32.3, -5.83, "↓");
         Assertions.assertEquals(expectedMsg, france4.evolutionValeurVeilleAction(jourActuelle));
-
     }
-    
+
     /**
-     * @author Rs yinc
-     * visualisation evolution de la valeur d une action simple par rapport a la semaine passee (evolution positive)
+     * @author RS & Yinc
+     * Teste l'évolution de la valeur d'une action simple par rapport à la semaine passée (évolution positive).
      */
-     @Test
+    @Test
     public void testEvaluationUpActionSimpleSemaine() {
-            
-        String expectedMsg = "Evolution de la valeur de l'action: \n" + 
-                "valeur au Jour{annee=2023, noJour=363}: 28.2\n" +
-                "valeur au Jour{annee=2024, noJour=5}: 30.2\n"+
-                "Evolution : 7.09% ↑";
-
+        String expectedMsg = getExpectedMessage("Jour{annee=2023, noJour=363}", 28.2, 30.2, 7.09, "↑");
         Assertions.assertEquals(expectedMsg, france2.evolutionValeurSemaineAction(jourActuelle));
-
     }
-    
+
     /**
-     * @author Rs yinc
-     * visualisation evolution de la valeur d une action simple par rapport a la semaine passee (evolution negative)
+     * @author RS & Yinc
+     * Teste l'évolution de la valeur d'une action simple par rapport à la semaine passée (évolution négative).
      */
     @Test
     public void testEvaluationDownActionSimpleSemaine() {
-            
-        String expectedMsg = "Evolution de la valeur de l'action: \n" + 
-                "valeur au Jour{annee=2023, noJour=363}: 38.3\n" +
-                "valeur au Jour{annee=2024, noJour=5}: 32.3\n"+
-                "Evolution : -15.67% ↓";
-
+        String expectedMsg = getExpectedMessage("Jour{annee=2023, noJour=363}", 38.3, 32.3, -15.67, "↓");
         Assertions.assertEquals(expectedMsg, france4.evolutionValeurSemaineAction(jourActuelle));
-
     }
-    
-    
+
+
+
+
+
 }
 
