@@ -65,6 +65,7 @@ public class ActionSimpleTest {
     /**
      * Test vérifiant qu'une action se crée lorsque 
      * les paramètres sont bons
+     * @author groupe 1
      */
     @Test
     protected void testConstructorParametersAreCorrectSuccess() {
@@ -80,6 +81,7 @@ public class ActionSimpleTest {
     }
     
     /**
+     * @author groupe 1
      * Test vérifiant qu'une action ne se crée pas 
      * avec un libellé invalide
      */
@@ -97,9 +99,10 @@ public class ActionSimpleTest {
     }
     
     /**
+     * @author groupe 1
      * Test pour l'enregistrement d'un cours 
      * avec une valeur négative 
-     * qui doit renvoyer une erreur
+     * qui doit renvoyer une erreur$
      */
     @Test
     protected void testenrgCoursValueIncorrectShouldFail() {
@@ -115,9 +118,11 @@ public class ActionSimpleTest {
     }
     
     /**
+     * @author groupe 1
      * Test pour l'enregistrement d'un cours 
      * un jour ou le cours a déja été enregistré, 
      * doit renvoyer une erreur
+     * 
      */
     @Test
     protected void testenrgCoursDayIncorrectShouldFail() {
@@ -134,7 +139,7 @@ public class ActionSimpleTest {
     }
     
     /**
-     * 
+     * @author groupe 1
      * Test du retour lorsque l'on veut accéder a la valeur d'un cours pour un jour
      */
     @Test
@@ -152,6 +157,7 @@ public class ActionSimpleTest {
     }
     
     /**
+     * @author groupe 1
      * Test pour un jour ou la valeur du cours n'est pas définie, 
      * doir renvoyer une erreur
      */
