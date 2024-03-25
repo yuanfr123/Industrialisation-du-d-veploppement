@@ -37,6 +37,22 @@ public class Jour {
         this.noJour = noJour;
     }
 
+    /**
+     * @author RS & Yinc
+     * @param numJour numero du jour
+     * @param numAnnee numero de l'annee
+     * @return object jour de la veille ou de la semaine precedente
+     */
+    public Jour getJour(int numJour, int numAnnee){
+        // Gérer le cas où le jour précédent tombe avant le début de l'année
+        if (numJour <= 0) {
+            numAnnee--;
+            numJour = Jour.nbJoursDansAnnee(numAnnee) + numJour; // Nb de jours dans l'année précédente
+        }
+
+        return new Jour(numAnnee, numJour);
+    }
+
     
     /**
      * @author Rs yinc
@@ -46,13 +62,8 @@ public class Jour {
         int nouveauJour = this.getNoJour() - 1;
         int nouvelleAnnee = this.annee;
 
-        // Gérer le cas où le jour précédent tombe avant le début de l'année
-        if (nouveauJour <= 0) {
-            nouvelleAnnee--;
-            nouveauJour = Jour.nbJoursDansAnnee(nouvelleAnnee) + nouveauJour; // Nb de jours dans l'année précédente
-        }
+        return getJour(nouveauJour, nouvelleAnnee);
 
-        return new Jour(nouvelleAnnee, nouveauJour);
     }
     
     /**
@@ -63,13 +74,7 @@ public class Jour {
         int nouveauJour = this.getNoJour() - 7;
         int nouvelleAnnee = this.annee;
 
-        // Gérer le cas où le jour précédent tombe avant le début de l'année
-        if (nouveauJour <= 0) {
-            nouvelleAnnee--;
-            nouveauJour += Jour.nbJoursDansAnnee(nouvelleAnnee); // Ajouter les jours de l'année précédente
-        }
-
-        return new Jour(nouvelleAnnee, nouveauJour);
+        return getJour(nouveauJour, nouvelleAnnee);
     }
 
     

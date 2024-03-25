@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: tp04.metier.ActionComposeTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.089 s -- in tp04.metier.ActionComposeTest
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.049 s -- in tp04.metier.ActionComposeTest
