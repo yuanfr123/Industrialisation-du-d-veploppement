@@ -118,6 +118,35 @@ public class Portefeuille {
         }
         return total;
     }
+
+    /**
+     * @author RS & Yinc
+     * @param j Jour actuel
+     * @param jourPrecedent la veille ou jour de la semaine derniere
+     * @return l'evolution du jour actuel par rapport au jour precedent
+     */
+    private String getStringEvolutionPortefeuille(Jour j, Jour jourPrecedent) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Evolution de la valeur du portefeuille: \n");
+
+        sb.append("valeur au ").append(jourPrecedent.toString()).append(": ").append(this.valeur(jourPrecedent)).append("\n");
+
+        sb.append("valeur au ").append(j.toString()).append(": ").append(this.valeur(j)).append("\n");
+
+        double variationPourcentage = (((this.valeur(j) - this.valeur(jourPrecedent)) / this.valeur(jourPrecedent)) * 100);
+        double variationArrondie = Math.round(variationPourcentage * 100.0) / 100.0;
+
+
+        if (this.valeur(j) > this.valeur(jourPrecedent)) {
+            sb.append("Evolution : ").append(variationArrondie).append("% ↑");
+            return sb.toString();
+        }
+        sb.append("Evolution : ").append(variationArrondie).append("% ↓");
+
+
+        return sb.toString();
+    }
     
     /**
      * @author Rs yinc
@@ -126,26 +155,7 @@ public class Portefeuille {
      */
     public String afficherEvolutionVeille(Jour j) {
         Jour veille = j.jourPrecedent();
-        StringBuilder sb = new StringBuilder();
-        
-        sb.append("Evolution de la valeur du portefeuille: \n");
-        
-        sb.append("valeur au ").append(veille.toString()).append(": ").append(this.valeur(veille)).append("\n");
-        
-        sb.append("valeur au ").append(j.toString()).append(": ").append(this.valeur(j)).append("\n");
-        
-        double variationPourcentage = (((this.valeur(j) - this.valeur(veille)) / this.valeur(veille)) * 100);
-        double variationArrondie = Math.round(variationPourcentage * 100.0) / 100.0;
-
-        
-        if (this.valeur(j) > this.valeur(veille)) {
-            sb.append("Evolution : ").append(variationArrondie).append("% ↑");
-            return sb.toString();
-        }
-        sb.append("Evolution : ").append(variationArrondie).append("% ↓");
-
-        
-        return sb.toString();
+        return getStringEvolutionPortefeuille(j, veille);
         
     }
     
@@ -156,24 +166,7 @@ public class Portefeuille {
      */
     public String afficherEvolutionSemaine(Jour j) {
         Jour semainePrecedente = j.semainePrecedente();
-        StringBuilder sb = new StringBuilder();
-        
-        sb.append("Evolution de la valeur du portefeuille: \n");
-        
-        sb.append("valeur au ").append(semainePrecedente.toString()).append(": ").append(this.valeur(semainePrecedente)).append("\n");
-        
-        sb.append("valeur au ").append(j.toString()).append(": ").append(this.valeur(j)).append("\n");
-        
-        double variationPourcentage = (((this.valeur(j) - this.valeur(semainePrecedente)) / this.valeur(semainePrecedente)) * 100);
-        double variationArrondie = Math.round(variationPourcentage * 100.0) / 100.0;
-        
-        if (this.valeur(j) > this.valeur(semainePrecedente)) {
-            sb.append("Evolution : ").append(variationArrondie).append("% ↑");
-            return sb.toString();
-        }
-       
-        sb.append("Evolution : ").append(variationArrondie).append("% ↓");
-        return sb.toString();
+        return getStringEvolutionPortefeuille(j, semainePrecedente);
         
     }
 }

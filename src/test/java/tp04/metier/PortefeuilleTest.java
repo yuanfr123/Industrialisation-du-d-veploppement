@@ -295,15 +295,15 @@ public class PortefeuilleTest {
     @Test
     public void testEvaluationDownPortefeuilleVeille() {
         Portefeuille portefeuille = new Portefeuille();
-            portefeuille.acheter(action3TestValueDown, 1);
-            portefeuille.acheter(action4TestValueDown, 1);
-            
-            String expectedMsg = "Evolution de la valeur du portefeuille: \n" + 
-                    "valeur au Jour{annee=2024, noJour=17}: 17.0\n" +
-                    "valeur au Jour{annee=2024, noJour=18}: 6.0\n"+
-                    "Evolution : -64.71% ↓";
-            
-            Assertions.assertEquals(expectedMsg, portefeuille.afficherEvolutionVeille(jourActuelle));
+        portefeuille.acheter(action3TestValueDown, 1);
+        portefeuille.acheter(action4TestValueDown, 1);
+
+        String expectedMsg = "Evolution de la valeur du portefeuille: \n" +
+                "valeur au Jour{annee=2024, noJour=17}: 17.0\n" +
+                "valeur au Jour{annee=2024, noJour=18}: 6.0\n"+
+                "Evolution : -64.71% ↓";
+
+        Assertions.assertEquals(expectedMsg, portefeuille.afficherEvolutionVeille(jourActuelle));
 
     }
     
@@ -314,15 +314,15 @@ public class PortefeuilleTest {
     @Test
     public void testEvaluationUpPortefeuilleSemaine() {
         Portefeuille portefeuille = new Portefeuille();
-            portefeuille.acheter(action1TestValueUp, 1);
-            portefeuille.acheter(action2TestValueUp, 1);
-            
-            String expectedMsg = "Evolution de la valeur du portefeuille: \n" + 
-                    "valeur au Jour{annee=2024, noJour=11}: 2.0\n" +
-                    "valeur au Jour{annee=2024, noJour=18}: 6.0\n"+
-                    "Evolution : 200.0% ↑";
-            
-            Assertions.assertEquals(expectedMsg, portefeuille.afficherEvolutionSemaine(jourActuelle));
+        portefeuille.acheter(action1TestValueUp, 1);
+        portefeuille.acheter(action2TestValueUp, 1);
+
+        String expectedMsg = "Evolution de la valeur du portefeuille: \n" +
+                "valeur au Jour{annee=2024, noJour=11}: 2.0\n" +
+                "valeur au Jour{annee=2024, noJour=18}: 6.0\n"+
+                "Evolution : 200.0% ↑";
+
+        Assertions.assertEquals(expectedMsg, portefeuille.afficherEvolutionSemaine(jourActuelle));
 
     }
     
@@ -333,15 +333,15 @@ public class PortefeuilleTest {
     @Test
     public void testEvaluationDownPortefeuilleSemaine() {
         Portefeuille portefeuille = new Portefeuille();
-            portefeuille.acheter(action3TestValueDown, 1);
-            portefeuille.acheter(action4TestValueDown, 1);
-            
-            String expectedMsg = "Evolution de la valeur du portefeuille: \n" + 
-                    "valeur au Jour{annee=2024, noJour=11}: 17.0\n" +
-                    "valeur au Jour{annee=2024, noJour=18}: 6.0\n"+
-                    "Evolution : -64.71% ↓";
-            
-            Assertions.assertEquals(expectedMsg, portefeuille.afficherEvolutionSemaine(jourActuelle));
+        portefeuille.acheter(action3TestValueDown, 1);
+        portefeuille.acheter(action4TestValueDown, 1);
+
+        String expectedMsg = "Evolution de la valeur du portefeuille: \n" +
+                "valeur au Jour{annee=2024, noJour=11}: 17.0\n" +
+                "valeur au Jour{annee=2024, noJour=18}: 6.0\n"+
+                "Evolution : -64.71% ↓";
+
+        Assertions.assertEquals(expectedMsg, portefeuille.afficherEvolutionSemaine(jourActuelle));
 
     }
 }
