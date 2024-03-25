@@ -10,8 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * 
  * @author groupe 1
+ * Classe concernant les actions dites simples, uniques 
  */
 public class ActionSimple extends Action {
 
@@ -20,6 +21,7 @@ public class ActionSimple extends Action {
 
     // constructeur
     /**
+     * @author groupe 1
      * constructeur permettant de créer une action simple
      * @param libelle correspond au nom de l'action
      */
@@ -43,6 +45,7 @@ public class ActionSimple extends Action {
      * méthode permettant l'enregistrement du cours d'une action a un jour donné
      * @param j correspond au jours sur lequel on enregistre le cour
      * @param v correspond a la valeur a définir pour ce jour et action
+     * @author groupe 1
      */
     public void enrgCours(Jour j, float v) throws IllegalArgumentException {
         if (this.mapCours.containsKey(j) == false) {
@@ -62,6 +65,7 @@ public class ActionSimple extends Action {
     }
 
     /**
+     * @author groupe 1
      * consulter la valeur de l'action pour un jour donné
      * @param j représente le jour pour lequel 
      * nous voulons savoir la valeur de l'action

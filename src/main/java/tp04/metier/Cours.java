@@ -64,9 +64,9 @@ public final class Cours {
         this.valeur = aValeur;
     }
 
-    @Override
-    public String toString() {
-        return "Cours{" + "jour=" + jour + ", valeur=" + valeur + '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Cours{" + "jour=" + jour + ", valeur=" + valeur + '}';
+//    }
 
 }

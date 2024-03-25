@@ -23,6 +23,14 @@ import org.junit.jupiter.api.BeforeEach;
 /**
  *
  * @author Rs yinc
+ *
+ * Afin d'effectuer nos tests,
+ *  Nous définissons un portefeuille,
+ *  deux actions simple,
+ *  une action composee,
+ *  le jour actuel,
+ *  enregistrement des cours des actions simple au jour actuel, a la veille et de la semaine precedente,
+ *  enregistrement de la composition de l'action composee
  */
 
 public class ActionComposeTest {
@@ -175,40 +183,47 @@ public class ActionComposeTest {
         //Assert
         Assertions.assertEquals(expectedMsg, currentComposition);
     }
-    
+
+
+    /**
+     * Génère le message attendu pour l'évolution de la valeur d'une action.
+     * @author RS & Yinc
+     * @param dateJour La date de la veille ou de la semaine precedente.
+     * @param valeurVeille La valeur de l'action au jour précédent.
+     * @param valeurJour La valeur de l'action au jour actuel.
+     * @param pourcentageEvolution Le pourcentage d'évolution entre les deux jours.
+     * @param direction La direction de l'évolution (↑ pour une augmentation, ↓ pour une diminution).
+     * @return Le message formaté représentant l'évolution de la valeur de l'action.
+     */
+
+    private String getExpectedMessage(String dateJour, double valeurVeille, double valeurJour, double pourcentageEvolution, String direction) {
+        return "Evolution de la valeur de l'action: \n" +
+                "valeur au " + dateJour + ": " + valeurVeille + "\n" +
+                "valeur au Jour{annee=2024, noJour=1}: " + valeurJour + "\n"+
+                "Evolution : " + pourcentageEvolution + "% " + direction;
+    }
+
     /**
      * @author Rs yinc
      *visualisation evolution de la valeur d une action composee par rapport a la veille avec le jour actuel etant le 1er jour de lannee
      */
-     @Test
+    @Test
     public void testEvaluationActionComposeVeille() {
-            
-        String expectedMsg = "Evolution de la valeur de l'action: \n" + 
-                "valeur au Jour{annee=2023, noJour=365}: 31.75\n" +
-                "valeur au Jour{annee=2024, noJour=1}: 31.25\n"+
-                "Evolution : -1.57% ↓";
-
+        String expectedMsg = getExpectedMessage("Jour{annee=2023, noJour=365}", 31.75, 31.25, -1.57, "↓");
         Assertions.assertEquals(expectedMsg, franceTV.evolutionValeurVeilleAction(jourActuelle));
-
     }
-    
-  
+
     /**
      * @author Rs yinc
      *visualisation evolution de la valeur d une action composee par rapport a la semaine precedente avec le jour actuel etant le 1er jour de lannee
      */
-     @Test
+    @Test
     public void testEvaluationActionComposeSemaine() {
-            
-        String expectedMsg = "Evolution de la valeur de l'action: \n" + 
-                "valeur au Jour{annee=2023, noJour=359}: 33.25\n" +
-                "valeur au Jour{annee=2024, noJour=1}: 31.25\n"+
-                "Evolution : -6.02% ↓";
-
+        String expectedMsg = getExpectedMessage("Jour{annee=2023, noJour=359}", 33.25, 31.25, -6.02, "↓");
         Assertions.assertEquals(expectedMsg, franceTV.evolutionValeurSemaineAction(jourActuelle));
-
     }
-    
- 
+
+
+
 
 }
