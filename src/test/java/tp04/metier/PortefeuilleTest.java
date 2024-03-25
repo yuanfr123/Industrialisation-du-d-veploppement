@@ -266,31 +266,42 @@ public class PortefeuilleTest {
         final String currentMessage = assertThrowsExactly.getMessage();
         Assertions.assertEquals(expectedMessage, currentMessage, "Expected error message");
     }
-    
+
     /**
-     * @author Rs yinc
-     *Visualiser l evolution de la valeur du portefeuille par rapport a la veille (evolution positive)
+     * Génère le message attendu pour l'évolution de la valeur du portefeuille.
+     *
+     * @author RS & yinc
+     * @param dateJour               La date de la veille ou de la semaine precedente.
+     * @param valeurReference       La valeur de référence du portefeuille.
+     * @param valeurActuelle        La valeur actuelle du portefeuille.
+     * @param pourcentageEvolution Le pourcentage d'évolution entre la valeur de référence et la valeur actuelle.
+     * @param direction             La direction de l'évolution (↑ pour une augmentation, ↓ pour une diminution).
+     * @return Le message formaté représentant l'évolution de la valeur du portefeuille.
+     */
+    private String generateExpectedMessage(String dateJour, double valeurReference, double valeurActuelle, double pourcentageEvolution, String direction) {
+        return "Evolution de la valeur du portefeuille: \n" +
+                "valeur au " + dateJour + ": " + valeurReference + "\n" +
+                "valeur au Jour{annee=2024, noJour=18}: " + valeurActuelle + "\n" +
+                "Evolution : " + pourcentageEvolution + "% " + direction;
+    }
+
+    /**
+     * @author RS & yinc
+     * Visualiser l'évolution de la valeur du portefeuille par rapport à la veille (évolution positive).
      */
     @Test
     public void testEvaluationUpPortefeuilleVeille() {
         Portefeuille portefeuille = new Portefeuille();
-            //création et enregistrement de la valeur de l'action1 avec une valeur de 1
-          
-            portefeuille.acheter(action1TestValueUp, 1);
-            portefeuille.acheter(action2TestValueUp, 1);
-            
-            String expectedMsg = "Evolution de la valeur du portefeuille: \n" + 
-                    "valeur au Jour{annee=2024, noJour=17}: 2.0\n" +
-                    "valeur au Jour{annee=2024, noJour=18}: 6.0\n"+
-                    "Evolution : 200.0% ↑";
-            
-            Assertions.assertEquals(expectedMsg, portefeuille.afficherEvolutionVeille(jourActuelle));
+        portefeuille.acheter(action1TestValueUp, 1);
+        portefeuille.acheter(action2TestValueUp, 1);
 
+        String expectedMsg = generateExpectedMessage("Jour{annee=2024, noJour=17}", 2.0, 6.0, 200.0, "↑");
+        Assertions.assertEquals(expectedMsg, portefeuille.afficherEvolutionVeille(jourActuelle));
     }
-    
+
     /**
-     * @author Rs yinc
-     * Visualiser l evolution de la valeur du portefeuille par rapport a la veille (evolution negative)
+     * @author RS & yinc
+     * Visualiser l'évolution de la valeur du portefeuille par rapport à la veille (évolution négative).
      */
     @Test
     public void testEvaluationDownPortefeuilleVeille() {
@@ -298,18 +309,13 @@ public class PortefeuilleTest {
         portefeuille.acheter(action3TestValueDown, 1);
         portefeuille.acheter(action4TestValueDown, 1);
 
-        String expectedMsg = "Evolution de la valeur du portefeuille: \n" +
-                "valeur au Jour{annee=2024, noJour=17}: 17.0\n" +
-                "valeur au Jour{annee=2024, noJour=18}: 6.0\n"+
-                "Evolution : -64.71% ↓";
-
+        String expectedMsg = generateExpectedMessage("Jour{annee=2024, noJour=17}", 17.0, 6.0, -64.71, "↓");
         Assertions.assertEquals(expectedMsg, portefeuille.afficherEvolutionVeille(jourActuelle));
-
     }
-    
+
     /**
-     * @author Rs yinc
-     *Visualiser l evolution de la valeur du portefeuille par rapport a la semaine derniere (evolution positive)
+     * @author RS & yinc
+     * Visualiser l'évolution de la valeur du portefeuille par rapport à la semaine dernière (évolution positive).
      */
     @Test
     public void testEvaluationUpPortefeuilleSemaine() {
@@ -317,18 +323,13 @@ public class PortefeuilleTest {
         portefeuille.acheter(action1TestValueUp, 1);
         portefeuille.acheter(action2TestValueUp, 1);
 
-        String expectedMsg = "Evolution de la valeur du portefeuille: \n" +
-                "valeur au Jour{annee=2024, noJour=11}: 2.0\n" +
-                "valeur au Jour{annee=2024, noJour=18}: 6.0\n"+
-                "Evolution : 200.0% ↑";
-
+        String expectedMsg = generateExpectedMessage("Jour{annee=2024, noJour=11}", 2.0, 6.0, 200.0, "↑");
         Assertions.assertEquals(expectedMsg, portefeuille.afficherEvolutionSemaine(jourActuelle));
-
     }
-    
+
     /**
-     * @author Rs yinc
-     *Visualiser l evolution de la valeur du portefeuille par rapport a la semaine derniere (evolution negative)
+     * @author RS & yinc
+     * Visualiser l'évolution de la valeur du portefeuille par rapport à la semaine dernière (évolution négative).
      */
     @Test
     public void testEvaluationDownPortefeuilleSemaine() {
@@ -336,12 +337,8 @@ public class PortefeuilleTest {
         portefeuille.acheter(action3TestValueDown, 1);
         portefeuille.acheter(action4TestValueDown, 1);
 
-        String expectedMsg = "Evolution de la valeur du portefeuille: \n" +
-                "valeur au Jour{annee=2024, noJour=11}: 17.0\n" +
-                "valeur au Jour{annee=2024, noJour=18}: 6.0\n"+
-                "Evolution : -64.71% ↓";
-
+        String expectedMsg = generateExpectedMessage("Jour{annee=2024, noJour=11}", 17.0, 6.0, -64.71, "↓");
         Assertions.assertEquals(expectedMsg, portefeuille.afficherEvolutionSemaine(jourActuelle));
-
     }
+
 }

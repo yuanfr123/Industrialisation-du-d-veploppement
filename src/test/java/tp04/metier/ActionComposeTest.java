@@ -188,18 +188,18 @@ public class ActionComposeTest {
     /**
      * Génère le message attendu pour l'évolution de la valeur d'une action.
      * @author RS & Yinc
-     * @param dateJour La date du jour.
-     * @param valeurJour La valeur de l'action au jour donné.
+     * @param dateJour La date de la veille ou de la semaine precedente.
      * @param valeurVeille La valeur de l'action au jour précédent.
+     * @param valeurJour La valeur de l'action au jour actuel.
      * @param pourcentageEvolution Le pourcentage d'évolution entre les deux jours.
      * @param direction La direction de l'évolution (↑ pour une augmentation, ↓ pour une diminution).
      * @return Le message formaté représentant l'évolution de la valeur de l'action.
      */
 
-    private String getExpectedMessage(String dateJour, double valeurJour, double valeurVeille, double pourcentageEvolution, String direction) {
+    private String getExpectedMessage(String dateJour, double valeurVeille, double valeurJour, double pourcentageEvolution, String direction) {
         return "Evolution de la valeur de l'action: \n" +
-                "valeur au " + dateJour + ": " + valeurJour + "\n" +
-                "valeur au Jour{annee=2024, noJour=1}: " + valeurVeille + "\n"+
+                "valeur au " + dateJour + ": " + valeurVeille + "\n" +
+                "valeur au Jour{annee=2024, noJour=1}: " + valeurJour + "\n"+
                 "Evolution : " + pourcentageEvolution + "% " + direction;
     }
 
